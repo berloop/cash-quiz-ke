@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-
+import { Button } from '@/components/ui/button';
 
 const GertPage = () => {
   const [questions, setQuestions] = useState([]);
@@ -66,6 +66,34 @@ const GertPage = () => {
   };
 
 
+  //calculate score and increment to the next question....
+
+  const nextQuestion = () => {
+
+    setSelectedAnswerIndex(null);
+    setResult((prev) =>
+      selectedAnswer ?
+        {
+          ...prev,
+          score: prev.score + 5,
+          correctAnswers: prev.correctAnswers + 1
+        } : {
+
+          ...prev,
+          wrongAnswers: prev.wrongAnswers + 1,
+        }
+    );
+
+    if (activeQuestion !== questions.length - 1) {
+      setActiveQuestion((prev) => prev + 1)
+    } else {
+      setActiveQuestion(0);
+      setShowResult(true);
+    }
+    setChecked(false);
+  }
+
+
 
 
 
@@ -101,17 +129,49 @@ const GertPage = () => {
                   className={selectedAnswerIndex === idx ? "px-4 py-2 border border-red-600 bg-[#121212] cursor-pointer rounded-sm font-bold transition animate-pulse" : "px-4 py-2 border border-black cursor-pointer"}>
                   <span className="text-base text-zinc-400">{option}</span>
                 </li>
+
               ))}
             </ul>
+
           </CardContent>
-          {/* Other card contents... */}
+
+          <CardFooter>
+            {checked ? (
+              <Button onClick={nextQuestion} variant="ndotored" className='text-base text-zinc-400 font-bold'>
+                {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
+              </Button>
+            ) : (
+              <Button disabled variant="ndotored" className='text-base text-zinc-400 font-bold'>
+                {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
+              </Button>
+            )}
+          </CardFooter>
         </Card>
 
 
       )}
 
       {showResult && (
-        <div>Result</div>
+        <Card className='mt-5'>
+          <CardHeader>
+            <CardTitle className='text-normal text-sm text-zinc-400'>
+              You have Finished Today's Trivia!!
+            </CardTitle>
+            <CardContent>
+              <div className='text-normal text-sm text-zinc-400 mr-5 mb-3'>Here's Your Stats!</div>
+
+              <br></br>
+              <div className='text-normal text-sm text-zinc-400 mr-5 space-y-4'>Overall {(result.score / 25) * 100}%</div>
+              <div className='text-normal text-sm text-zinc-400 mr-5 space-y-4'>Total Questions: {questions.length}</div>
+              <div className='text-normal text-sm text-zinc-400 mr-5 space-y-4'>Total Score: {result.score}</div>
+              <div className='text-normal text-sm text-zinc-400 mr-5 space-y-4'>Correct Answers: {result.correctAnswers}</div>
+              <div className='text-normal text-sm text-zinc-400 mr-5 space-y-4'>Wrong Answers: {result.wrongAnswers}</div>
+            </CardContent>
+          </CardHeader>
+          <CardFooter>
+            <Button onClick={() => window.location.reload()} variant={'ndotored'} className='text-zinc-400 font-bold'>Restart</Button>
+          </CardFooter>
+        </Card>
       )}
     </div>
   );
