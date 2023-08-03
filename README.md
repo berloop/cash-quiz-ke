@@ -1,54 +1,59 @@
-# Fumar - AI-Powered Content Generation SAAS
+# Ndoto Trivia Platform
 
-![Fumar Logo](/public/spiral.png)
+![Ndoto Trivia Logo](https://ndototrivia-za.netlify.app/assets/MainLogo.png)
 
-Welcome to Fumar, an AI-Powered Software as a Service (SAAS) platform that empowers users to generate creative and engaging content effortlessly. Fumar leverages the power of artificial intelligence to provide various content generation capabilities, including text-video, text-image, text-music, and an interactive ChatGPT chat feature. With Fumar, content creation becomes faster, more efficient, and highly customizable.
+Welcome to Ndoto Trivia, the ultimate trivia platform that brings fun, knowledge, and excitement to your fingertips. With Ndoto Trivia, we take trivia to the next level, offering a modern, sleek, and user-friendly experience like no other. Get ready to test your knowledge, challenge your friends, and embark on a journey of learning and entertainment.
 
 ## Features
 
-### 1. Text-Video Generation
-Fumar allows users to convert written content into captivating videos. Whether it's creating explainer videos, product demos, or educational content, Fumar's AI engine seamlessly generates visually appealing videos from text input, saving both time and resources.
+### 1. Vast Trivia Database
+Ndoto Trivia boasts an extensive collection of trivia questions from various categories, including history, science, pop culture, sports, and more. With thousands of questions to choose from, you'll never run out of exciting challenges.
 
-### 2. Text-Image Generation
-Elevate your visual content with Fumar's AI-driven text-to-image feature. Generate stunning graphics, illustrations, or memes directly from written descriptions, offering an innovative approach to express ideas and stories visually.
+### 2. Engaging Gameplay
+Our platform provides a seamless and immersive trivia experience. Engage in single-player mode to challenge yourself or join multiplayer battles to compete with friends and players from around the world.
 
-### 3. Text-Music Generation
-Enhance your content with customized soundtracks produced by Fumar's AI-powered music generation. By inputting text, users can create unique and royalty-free music tracks to complement their videos, presentations, or podcasts.
+### 3. Real-Time Leaderboard
+See how your knowledge stacks up against others with our real-time leaderboard. Earn points for each correct answer and climb the ranks to become the ultimate trivia champion.
 
-### 4. ChatGPT - Interactive Conversations
-Fumar incorporates a ChatGPT feature, allowing users to engage in dynamic and interactive conversations with the AI. This functionality can be utilized for customer support, creative brainstorming, or simply for fun and entertainment.
+### 4. Customizable Quizzes
+Create your own quizzes by selecting specific categories or difficulty levels. Tailor the trivia experience to your preferences and share your unique quizzes with friends.
 
-## Getting Started
+### 5. Daily Challenges
+Participate in daily trivia challenges and win exciting rewards. Put your knowledge to the test every day and unlock exclusive achievements.
 
-To start using Fumar and unlocking the potential of AI-powered content generation, follow these simple steps:
+### 6. Sleek and Intuitive Design
+Ndoto Trivia is designed with a sleek and intuitive interface, making it easy to navigate and enjoyable to use. Whether you're a trivia enthusiast or a first-time player, our platform ensures a seamless user experience.
 
-1. **Sign Up**: Visit our website (https://www.fumar.ai) and sign up for a Fumar account. If you already have an account, log in to access your dashboard.
+## How to Get Started
 
-2. **Choose a Content Type**: Select the type of content you want to generate - text-video, text-image, or text-music.
+Getting started with Ndoto Trivia is simple and quick:
 
-3. **Input Your Text**: Enter the relevant text content or description in the provided input box. For ChatGPT, begin interacting with the AI by typing in the chat window.
+1. **Sign Up**: Create your Ndoto Trivia account by visiting our website (https://www.ndoto-trivia.com). You can also log in with your existing account.
 
-4. **Generate & Preview**: Click on the "Generate" button to let Fumar's AI engine create your content. Preview the generated output and make any necessary adjustments.
+2. **Select a Quiz**: Browse through our vast trivia categories and choose a quiz that piques your interest.
 
+3. **Answer Questions**: Engage in thrilling trivia battles by answering questions within the time limit. The faster you answer, the more points you earn.
+
+4. **Challenge Friends**: Invite your friends to join the fun and compete in exciting multiplayer trivia battles.
 
 ## Pricing
 
-Fumar offers a Pro Plan with unlimited FumarTokens to use all features of the application. You can Start for Free with Limited FumarTokens.
+Ndoto Trivia offers a free basic membership that grants access to a selection of quizzes. For access to our full database, premium quizzes, and exclusive features, upgrade to our affordable premium plan.
 
 ## Support
 
-If you encounter any issues, have questions, or need assistance, our support team is available 24/7 to help you. You can reach out to us via email at support@fumar-ai.com or use the live chat support feature available on our website.
+Our dedicated support team is available 24/7 to assist you with any inquiries or issues you may have. Reach out to us via email at support@ndoto-trivia.com or use our in-app chat for instant assistance.
 
 ## Stay Connected
 
-Stay updated with the latest news, features, and tips from Fumar by following us on social media:
+Stay up-to-date with the latest trivia challenges, news, and updates by following us on social media:
 
-- Twitter: https://twitter.com/fumar-ai
-- Facebook: https://facebook.com/fumar-ai
-- LinkedIn: https://linkedin.com/company/fumar-ai
+- Twitter: https://twitter.com/ndoto-trivia
+- Facebook: https://facebook.com/ndoto-trivia
+- Instagram: https://instagram.com/ndoto-trivia
 
 ---
 
-Thank you for choosing Fumar as your go-to AI-powered content generation platform. We are excited to witness the remarkable content you create and the impact it has on your audience. Happy generating!
+Thank you for choosing Ndoto Trivia as your go-to platform for knowledge, entertainment, and memorable trivia experiences. Get ready to embark on a trivia adventure like no other and discover the joy of learning while having fun!
 
-*Note: The links and URLs in this README are for illustrative purposes only and do not represent real website addresses.*
+*Note: The links and URLs in this document are for illustrative purposes only and do not represent real website addresses.*

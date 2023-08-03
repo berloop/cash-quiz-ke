@@ -26,47 +26,47 @@ const GertPage = () => {
 
   useEffect(() => {
     fetchQuestions();
-    
+
   }, []);
 
   const fetchQuestions = async () => {
     const questionsData = await getTriviaQuestions();
     setQuestions(questionsData);
-    
-    
+
+
   };
 
-  
+
   // Check if the questions array is empty or undefined
   if (!questions || questions.length === 0) {
     return <div className='text-white m-3'>Loading...</div>;
   }
 
-// const correctAnswer = questions[activeQuestion];
-const correctAnswer = questions[activeQuestion]?.answer;
+  // const correctAnswer = questions[activeQuestion];
+  const correctAnswer = questions[activeQuestion]?.answer;
 
-    //select and check answer..
-    const onAnswerSelected = (option, idx) => {
-      setChecked(true);
-      setSelectedAnswerIndex(idx);
-      
-      if(option.trim() === correctAnswer.trim()){
-          setSelectedAnswer(true);
-          console.log(correctAnswer);
-          console.log(option);
-          console.log('true');
-      } else {
-        setSelectedAnswer(false)
-       
-        console.log(correctAnswer);
-        console.log(option);
-        console.log('false');
-      }
+  //select and check answer..
+  const onAnswerSelected = (option, idx) => {
+    setChecked(true);
+    setSelectedAnswerIndex(idx);
 
-    };
-    
+    if (option.trim() === correctAnswer.trim()) {
+      setSelectedAnswer(true);
+      console.log(correctAnswer);
+      console.log(option);
+      console.log('true');
+    } else {
+      setSelectedAnswer(false)
 
-   
+      console.log(correctAnswer);
+      console.log(option);
+      console.log('false');
+    }
+
+  };
+
+
+
 
 
   return (
@@ -96,9 +96,9 @@ const correctAnswer = questions[activeQuestion]?.answer;
           <CardContent>
             <ul className="w-48 text-sm font-medium space-y-2 border border-black p-3 rounded-lg bg-[#ed2324]">
               {questions[activeQuestion].options.map((option, idx) => (
-                <li key={idx} 
-                   onClick={() => onAnswerSelected(option, idx)}
-                className={selectedAnswerIndex=== idx ? "px-4 py-2 border border-red-600 bg-[#121212] cursor-pointer rounded-sm font-bold transition animate-pulse" : "px-4 py-2 border border-black cursor-pointer"}>
+                <li key={idx}
+                  onClick={() => onAnswerSelected(option, idx)}
+                  className={selectedAnswerIndex === idx ? "px-4 py-2 border border-red-600 bg-[#121212] cursor-pointer rounded-sm font-bold transition animate-pulse" : "px-4 py-2 border border-black cursor-pointer"}>
                   <span className="text-base text-zinc-400">{option}</span>
                 </li>
               ))}
@@ -106,12 +106,12 @@ const correctAnswer = questions[activeQuestion]?.answer;
           </CardContent>
           {/* Other card contents... */}
         </Card>
-        
+
 
       )}
 
       {showResult && (
-          <div>Result</div>
+        <div>Result</div>
       )}
     </div>
   );
