@@ -33,3 +33,11 @@ model TriviaQuestion {
   answer      String
   showName    String  // Added the showName field
 }
+
+model TriviaScore {
+  id         String    @id @default(cuid())
+  showName   String
+  score      Int
+  timestamp  DateTime  @default(now())
+  userId         String    @unique 
+}
