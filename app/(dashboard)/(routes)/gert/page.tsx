@@ -16,6 +16,7 @@ import { auth, useUser } from '@clerk/nextjs';
 import prismadb from '@/lib/prismadb';
 import { ok } from 'assert';
 import { useRouter } from 'next/navigation';
+import { Spinner } from '@/components/spinner';
 
 
 
@@ -40,6 +41,7 @@ user?.fullName
   const [activeQuestion, setActiveQuestion] = useState(0);
   // const [selectedAnswer, setSelectedAnswer] = useState('');
   const [checked, setChecked] = useState(false);
+  const [loadingQuestions, setLoadingQuestions] = useState<boolean>(true);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState<Result>({
@@ -53,13 +55,19 @@ user?.fullName
   }, []);
 
   const fetchQuestions = async () => {
-    const questionsData = await getTriviaQuestions();
-    setQuestions(questionsData);
+    try {
+      const questionsData = await getTriviaQuestions();
+      setQuestions(questionsData);
+      setLoadingQuestions(false);
+    } catch (error) {
+      console.error('Error Fetching Questions', error);
+      setLoadingQuestions(false);
+    }
   };
 
-  if (!questions || questions.length === 0) {
-    return <div className='text-white m-3'>Loading...</div>;
-  }
+  // if (!questions || questions.length === 0) {
+  //   return <Spinner />;
+  // }
 
   const correctAnswer = questions[activeQuestion]?.answer;
 
@@ -168,12 +176,14 @@ const nextQuestion = async () => {
 
 
   
-  const overallPercentage = (result.correctAnswers / questions.length) * 100;
+  // const overallPercentage = (result.correctAnswers / questions.length) * 100;
+  const overallPercentage = Math.round((result.correctAnswers / questions.length) * 100);
+
 
 
   return (
     <div className="px-5 py-10 text-white">
-      <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName}</h1>
+      <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName || "Friend:)"}.</h1>
       <div className="mb-4 space-y-2">
         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
@@ -182,6 +192,12 @@ const nextQuestion = async () => {
           Play, Win, Repeat on Gert Trivia!
         </p>
       </div>
+      {loadingQuestions ? (
+        <div className="flex items-center justify-center">
+          <Spinner />
+        </div>
+      ) : (
+        <>
       <h2 className='text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
 
       {questions.length > 0 && !showResult && (
@@ -237,8 +253,10 @@ const nextQuestion = async () => {
             <Button onClick={() => window.location.reload()} variant={'ndotored'} className='text-zinc-400 font-bold'>Restart</Button>
           </CardFooter>
         </Card>
-      )}
-    </div>
+    )}
+    </>
+  )}
+</div>
   );
 };
 

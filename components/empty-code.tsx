@@ -16,11 +16,11 @@ export const EmptyCode= ({
             <Image className="animate-pulse"
             alt="Empty"
              fill
-              src="/code.svg"
+              src="/emptyman.svg"
                />
 
         </div>
-        <p className="text-muted-foreground text-sm text-center ">
+        <p className="text-white opacity-70 text-light text-sm text-center mt-3 ">
             {label}
         </p>
         </div>
