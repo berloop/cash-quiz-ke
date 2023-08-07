@@ -1,3 +1,4 @@
+import { BarChart2 } from "lucide-react";
 import Image from "next/image";
 
 interface EmptyProps {
@@ -13,14 +14,16 @@ export const EmptyImage= ({
     return (
         <div className="h-full p-20 flex flex-col items-center justify-center">
           <div className="relative h-72 w-72">
+
+         
             <Image className="animate-pulse"
             alt="Empty"
              fill
-              src="/image.svg"
+              src="/stats.svg"
                />
 
         </div>
-        <p className="text-muted-foreground text-sm text-center ">
+        <p className="text-zinc-500 text-sm font-bold text-center mt-3">
             {label}
         </p>
         </div>

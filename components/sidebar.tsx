@@ -7,7 +7,7 @@ import { Nunito } from "next/font/google";
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Activity, Camera, ChevronRightSquare, Code, FileImage, FileVideo2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, Settings, Sparkles, TrophyIcon, Tv2, User2Icon, VideoIcon } from "lucide-react";
+import { Activity, BarChart2, Camera, ChevronRightSquare, Code, FileImage, FileVideo2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, Settings, Sparkles, TrophyIcon, Tv2, User2Icon, VideoIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { FreeCounter } from "@/components/free-counter";
 
@@ -40,8 +40,15 @@ const routes = [
         href: "/gert",
         color: "text-zinc-400",
     },
+    
     {
-        label: "My Profile",
+        label: "My Scores",
+        icon: BarChart2,
+        href: "/stats",
+        color: "text-zinc-400",
+    },
+    {
+        label: "Profile Settings",
         icon: User2Icon,
         href: "/profile",
         color: "text-zinc-400",
@@ -49,12 +56,6 @@ const routes = [
 
     
    
-    {
-        label: "Preferences",
-        icon: Settings,
-        href: "/settings",
-        color: "text-zinc-400",
-    },
 
 ];
 
