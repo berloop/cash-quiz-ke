@@ -38,6 +38,12 @@ model TriviaScore {
   id         String    @id @default(cuid())
   showName   String
   score      Int
-  timestamp  DateTime  @default(now())
+  firstPlayedDate  DateTime  @default(now())
   userId         String    @unique 
+  userEmail      String    
+  userName       String    
+  userFirstName  String?   // Nullable field
+  userLastName   String?   // Nullable field
+  lastPlayedDate DateTime? // Nullable field
+
 }

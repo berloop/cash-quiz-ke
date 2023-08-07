@@ -1,6 +1,9 @@
 import prismadb from "@/lib/prismadb";
-import { auth } from "@clerk/nextjs";
+import { auth, useUser } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
+import { date } from "zod";
+
+
 
 
 
@@ -13,6 +16,13 @@ export async function POST(
         const { userId } = auth();
         const body = await req.json();
         const { payload } = body;
+        
+        // // //getting clerk user object...
+        // const { user } = useUser();
+
+        // const email = user?.primaryEmailAddress || "Unknown Email";
+
+
 
         if (!userId) {
             return new NextResponse("Unauthorized User", { status: 401 });
@@ -25,14 +35,22 @@ export async function POST(
 
         const userScoreRecord = await prismadb.triviaScore.findUnique({
             where: {
-                userId
+                userId,
+            
             }
         });
+
+     
     
         if (userScoreRecord) {
+
+            const existingScore = userScoreRecord.score; 
             await prismadb.triviaScore.update({
                 where: { userId: userId },
-                data: { score: userScoreRecord.score + payload.score },
+                data: { 
+                    score: existingScore + payload.score,
+                    lastPlayedDate: new Date().toISOString()
+                 },
             });
     
         } else {
@@ -41,7 +59,12 @@ export async function POST(
                   userId: userId as string,
                   score: payload.score,
                   showName: payload.showName,
-                  timestamp: payload.timestamp,
+                  firstPlayedDate: payload.timestamp,
+                  userEmail: payload.userEmail,
+                  userName: payload.userName,
+                  userFirstName: payload.userFirstName,
+                  userLastName: payload.userLastName,
+
                 },
               });
         
@@ -51,7 +74,7 @@ export async function POST(
 
 
 
-        return NextResponse.json("Here is your payload", response);
+        return NextResponse.json("Data was successfully saved to the Database", response);
       
     }
     catch (error) {

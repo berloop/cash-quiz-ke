@@ -12,10 +12,15 @@ import {
 import { Button } from '@/components/ui/button';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-import { auth } from '@clerk/nextjs';
+import { auth, useUser } from '@clerk/nextjs';
 import prismadb from '@/lib/prismadb';
 import { ok } from 'assert';
 import { useRouter } from 'next/navigation';
+
+
+
+
+
 
 interface Result {
   score: number;
@@ -24,6 +29,11 @@ interface Result {
 }
 
 const GertPage: React.FC = () => {
+  
+const {user} = useUser();
+user?.fullName
+
+
   const [questions, setQuestions] = useState<any[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | boolean>('');
 
@@ -73,55 +83,6 @@ const GertPage: React.FC = () => {
   const router = useRouter();
 
 
-
-// ... Rest of your component code ...
-
-// const nextQuestion = async () => {
-//   setSelectedAnswerIndex(null);
-//   setResult((prev) =>
-//     selectedAnswer
-//       ? {
-//           ...prev,
-//           score: prev.score + 5,
-//           correctAnswers: prev.correctAnswers + 1,
-//         }
-//       : {
-//           ...prev,
-//           wrongAnswers: prev.wrongAnswers + 1,
-//         }
-//   );
-
-//   if (activeQuestion !== questions.length - 1) {
-//     setActiveQuestion((prev) => prev + 1);
-//   } else {
-//     setActiveQuestion(0);
-//     setShowResult(true);
-
-//     // Prepare the payload for sending the score
-//     const scorePayload = {
-//       score: result.score,
-//       showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
-//       timestamp: new Date().toISOString(),
-//     };
-
-//     try {
-//       // Call sendScore with the payload
-//       const response = await axios.post("/api/triviascore", scorePayload); // Pass the payload as the second argument
-
-//       // Optionally, you can handle the response from the API here
-//       console.log(response.data);
-//       toast.success('Score saved successfully!');
-//     } catch (error: any) {
-//       console.error('Error sending score:', error);
-//       console.log(scorePayload);
-//       toast.error('Oops! Something went wrong while saving the score.');
-//     }
-//     finally{
-//       router.refresh();
-//     }
-//   }
-//   setChecked(false);
-// };
 const nextQuestion = async () => {
   setSelectedAnswerIndex(null);
   setResult((prev) =>
@@ -148,6 +109,12 @@ const nextQuestion = async () => {
       score: result.score,
       showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
       timestamp: new Date().toISOString(),
+      userName:user?.fullName || "Anonymous User",
+      userFirstName:user?.firstName || "Anonymous User",
+      userEmail:user?.primaryEmailAddress?.emailAddress || "Anonymous User",
+      userLastName: user?.lastName || "Anonymous User"
+
+
     };
 
     try {
@@ -169,21 +136,17 @@ const nextQuestion = async () => {
   setChecked(false);
 };
 
-  // const getScorePayload = () => {
-  //    const score = result.score;
-  //    const showName = 'Gert';
-  //    const timestamp = new Date().toISOString();
-  //   //  const userId = auth();
-
-  //    return console.log("Payload", score,showName,timestamp);
-
-  // }
+  
 
 
   interface TriviaScoreData {
     score: number;
     showName: string;
     timestamp: string;
+    userName:string;
+    userFirstName:string;
+    userEmail:string;
+    userLastName:string;
   }
   
   async function sendScore(triviascore: TriviaScoreData) {
@@ -204,45 +167,19 @@ const nextQuestion = async () => {
 
 
 
-
-  // const sendScore = async () => {
-  //   const { score } = result;
-  
-  //   // Log the payload data to check if it's correct
-  //   console.log('Payload data:', {
-  //     score,
-  //     showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
-  //     timestamp: new Date().toISOString(),
-  //   });
-  
-  //   try {
-  //     const response = await axios.post('/api/triviascore', {
-  //       score,
-  //       showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
-  //       timestamp: new Date().toISOString(),
-  //     });
-  
-  //     console.log('Response data:', response.data);
-  //     toast.success('Score saved successfully!');
-  //   } catch (error) {
-  //     console.error('Error sending score:', error);
-  //     toast.error('Oops! Something went wrong while saving the score.');
-  //   }
-  // };
-
   
   const overallPercentage = (result.correctAnswers / questions.length) * 100;
 
 
   return (
     <div className="px-5 py-10 text-white">
-      <h1 className="text-3xl font-bold mb-5 text-center">This is Gert Trivia! Welcome</h1>
+      <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName}</h1>
       <div className="mb-4 space-y-2">
         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
         </h2>
         <p className="text-white font-medium text-sm md:text-lg text-center">
-          Play, Win, Repeat!
+          Play, Win, Repeat on Gert Trivia!
         </p>
       </div>
       <h2 className='text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
