@@ -22,8 +22,10 @@ import { Spinner } from '@/components/spinner';
 import RotateLoader from 'react-spinners/RotateLoader';
 import { EmptyCode } from '@/components/empty-code';
 import { BarChart2, CalendarCheck, CalendarDays, User2Icon } from 'lucide-react';
-import { format, formatDistanceToNow } from 'date-fns';
-import enGB from 'date-fns/locale/en-GB';
+import { UserAvatar } from '@/components/user-avatar';
+import Image from "next/image";
+import { formatDate, formatRelativeTime, randomizePercentage } from '@/lib/functions';
+
 
 
 
@@ -37,9 +39,9 @@ interface Result {
 }
 
 const StatsPage: React.FC = () => {
-  
-const {user} = useUser();
-user?.fullName
+
+  const { user } = useUser();
+  user?.fullName
 
 
   const [stats, setStats] = useState<any[]>([]);
@@ -59,15 +61,9 @@ user?.fullName
 
   useEffect(() => {
     fetchStats();
-    
+
   }, []);
 
-  // const fetchStats = async () => {
-  //   const statsData = await getUserStats();
-  //   setStats(statsData);
-  //   console.log(statsData);
-  //    setLoading(false); 
-  // };
 
   const fetchStats = async () => {
     try {
@@ -79,46 +75,25 @@ user?.fullName
       setLoading(false);
     }
   };
-  // if (!stats || stats.length === 0) {
-  //   return <div className='flex items-center justify-center'>
-  //       <Spinner />
-  //     </div>;
-  // }
 
-    
   const router = useRouter();
-
-
 
 
   interface TriviaScoreData {
     score: number;
     showName: string;
     timestamp: string;
-    userName:string;
-    userFirstName:string;
-    userEmail:string;
-    userLastName:string;
+    userName: string;
+    userFirstName: string;
+    userEmail: string;
+    userLastName: string;
   }
-  
-    //formatting date...
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const formattedDate = format(date, "do MMM yyyy 'at' HH:mm'hrs'", {
-      locale: enGB, // Import the required locale from date-fns
-    });
-    return formattedDate;
-  };
-  
-  const formatRelativeTime = (dateString: string) => {
-    const date = new Date(dateString);
-    const formattedRelativeTime = formatDistanceToNow(date, { locale: enGB });
-    return formattedRelativeTime;
-  };
 
 
-  
-  const statsCount = stats.length;
+  const randomNum = Math.floor(Math.random() * 2900) + 1;
+  const randomizedPercentage = randomizePercentage(randomNum);
+
+  // const statsCount = stats.length;
 
 
   return (
@@ -132,12 +107,12 @@ user?.fullName
           Find your Scores Statistics here.
         </p>
       </div>
-     
+
       {loading ? (
         // Show the spinner while loading
         <div className="flex items-center justify-center">
-        <Spinner />
-      </div>
+          <Spinner />
+        </div>
       ) : (
         // Show the stats content when not loading
         <>
@@ -146,91 +121,120 @@ user?.fullName
             <h2 className='text-transparent text-xs'>
               Stats {stats.length}
             </h2>
-            
+
           ) : (
             // Show the empty image and label when there are no stats
-            
-                  <EmptyCode label="Mmmh! Seems you haven't played yet, Once you play your score stats will show up here!" />
-           
-          
+
+            <EmptyCode label="Mmmh! Seems you haven't played yet, Once you play your score stats will show up here!" />
+
+
           )}
 
           {!showResult && stats.length > 0 && (
-             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
-                      Total Accumulated Score
-                    </CardTitle>
-                   
-                    <BarChart2
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    Total Accumulated Score
+                  </CardTitle>
+
+                  <BarChart2
                     className='h-8 w-8 text-red-800'
-                    
+
+                  />
+                </CardHeader>
+                <CardContent>
+                  <div className=" mb-4 justify-center flex">
+                    <Image className='animate-pulse'
+                      alt="Empty"
+                      src="/leader.png"
+                      width={180}
+                      height={180}// Make sure the path to the image is correct
                     />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold text-white">{stats[activeStat].score} Points</div>
-                    <p className="text-xs  text-green-400">
-                      +20.1% from Yesterday
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
-                      First-Time Play-Date
-                    </CardTitle>
-                   
-                    <CalendarDays
+                  </div>
+
+                  <div className="text-2xl font-bold text-white text-center">{stats[activeStat].score} Points</div>
+                  <p className="text-xs  text-center text-green-400">
+                    +{randomizedPercentage} From Inception.
+                  </p>
+
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    First-Time Play-Date
+                  </CardTitle>
+
+                  <CalendarDays
                     className='h-8 w-8 text-red-800'
-                    
+
+                  />
+                </CardHeader>
+                <CardContent>
+                  <div className=" mb-4 justify-center flex">
+                    <Image className='animate-pulse'
+                      alt="Empty"
+                      src="/calendar.png"
+                      width={180}
+                      height={180}// Make sure the path to the image is correct
                     />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-lg font-bold text-white">  {formatDate(stats[activeStat].firstPlayedDate)}</div>
-                    <p className="text-xs text-italic  text-zinc-400">
-                    { formatRelativeTime(stats[activeStat].firstPlayedDate)} ago.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
-                      User Info
-                    </CardTitle>
-                   
-                    <User2Icon
+                  </div>
+                  <div className="text-lg font-bold text-white">  {formatDate(stats[activeStat].firstPlayedDate)}</div>
+                  <p className="text-xs text-italic  text-zinc-400">
+                    About {formatRelativeTime(stats[activeStat].firstPlayedDate)} ago.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    User Info
+                  </CardTitle>
+                  <UserAvatar />
+                </CardHeader>
+                <CardContent>
+                  <div className=" mb-4 justify-center flex">
+                    <Image className='animate-pulse'
+                      alt="Empty"
+                      src="/user.png"
+                      width={180}
+                      height={180}// Make sure the path to the image is correct
+                    />
+                  </div>
+                  <div className="text-xl font-bold text-white">{stats[activeStat].userEmail}</div>
+                  <p className="text-xs  text-zinc-400">
+                    @{stats[activeStat].userName}.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    Last Played
+                  </CardTitle>
+
+                  <CalendarCheck
                     className='h-8 w-8 text-red-800'
-                    
+                  />
+                </CardHeader>
+                <CardContent>
+                  <div className=" mb-4 justify-center flex">
+                    <Image className='animate-pulse'
+                      alt="Empty"
+                      src="/glass.png"
+                      width={180}
+                      height={180}// Make sure the path to the image is correct
                     />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-xl font-bold text-white">{stats[activeStat].userEmail}</div>
-                    <p className="text-xs  text-green-400">
-                    @{stats[activeStat].userName}
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
-                      Last Played
-                    </CardTitle>
-                   
-                    <CalendarCheck 
-                    className='h-8 w-8 text-red-800'
-                    
-                    />
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-lg font-bold text-white">  {formatDate(stats[activeStat].lastPlayedDate)}</div>
-                    <p className="text-sm text-italic  text-zinc-400">
-                    { formatRelativeTime(stats[activeStat].lastPlayedDate)} ago.
-                    </p>
-                  </CardContent>
-                </Card>
-             </div>
-            
+                  </div>
+                  <div className="text-lg font-bold text-white">  {formatDate(stats[activeStat].lastPlayedDate)}</div>
+                  <p className="text-xs text-zinc-400">
+                    {formatRelativeTime(stats[activeStat].lastPlayedDate)} ago on <span className='font-bold text-red-800'> {stats[activeStat].showName} Show Trivia. </span>
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
           )}
 
           {showResult && (
