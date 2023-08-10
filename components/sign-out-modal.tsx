@@ -46,13 +46,13 @@ export const SignOutModal = () => {
     
   </Card>
   <h2 className="text-white text-2xl font-bold">Are you seriously like, logging out?</h2>
-  <p className="font-medium text-normal text-zinc-400">Oh, we'd hate to see you leaving but you can log back at any time and continue playing our trivia</p>
+  <p className="font-medium text-normal text-zinc-400 text-center">Oh, we'd hate to see you leaving but you can jump back with us any time and enjoy the fun.</p>
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
                     <SignOutButton>
-                    <Button variant={"ndoto"} size="lg" className="w-full font-bold" onClick={proModal.onClose}>
-                        <Power className="w-4 h-4 mr-2" />
+                    <Button variant={"ndotored"} size="lg" className="w-full font-bold text-white" onClick={proModal.onClose}>
+                        <Power className="w-4 h-4 mr-2 text-white" />
                         Continue to Logging Out
                     </Button>
                     </SignOutButton>
