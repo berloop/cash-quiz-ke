@@ -202,9 +202,9 @@ const StatsPage: React.FC = () => {
                       height={180}// Make sure the path to the image is correct
                     />
                   </div>
-                  <div className="text-xl font-bold text-white">{stats[activeStat].userEmail}</div>
+                  <div className="text-xl font-bold text-white">{stats[activeStat].userName}</div>
                   <p className="text-xs  text-zinc-400">
-                    @{stats[activeStat].userName}.
+                    @{stats[activeStat].userFirstName}.
                   </p>
                 </CardContent>
               </Card>

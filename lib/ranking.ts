@@ -1,6 +1,6 @@
 
 
-export const getUserStats = async () => {
+export const getRankings = async () => {
     try {
         const response = await fetch('/api/leaderboard'); // Fetch data from the API route
         if (response.ok) {

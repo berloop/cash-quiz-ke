@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ProFumarModal } from "@/components/pro-fumar-modal";
+import { SignOutModal } from "@/components/sign-out-modal";
 
 export const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false);
@@ -17,7 +17,7 @@ export const ModalProvider = () => {
 
      return(
         <>
-        <ProFumarModal />
+        <SignOutModal />
         
         </>
      )

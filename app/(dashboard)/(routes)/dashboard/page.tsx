@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 import { Activity, ArrowRight, ArrowRightCircle, ArrowRightSquare, ChevronRightSquare, Code, Code2, FileImage, FileVideo2, ListMusic, MessageSquare, MessagesSquare, Music2, Settings2Icon, Sparkles } from "lucide-react";
+import { useUser } from "@clerk/nextjs";
 
 
 const tools = [
@@ -75,6 +76,7 @@ const tools = [
 
 
 const DashboardPage = () => {
+    const { user } = useUser();
 
     const router = useRouter();
 
@@ -84,8 +86,9 @@ const DashboardPage = () => {
 
         <div>
             <div className="mb-4 space-y-2">
+            <h1 className="text-sm font-bold text-white text-center">Hi, {user?.fullName || "Friend:)"}!</h1>
                 <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-                    Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
+                Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
                 </h2>
                 <p className="text-white font-medium text-sm md:text-lg text-center">
                     Play, Win, Repeat!
@@ -112,8 +115,8 @@ const DashboardPage = () => {
                                 />
                             </div>
                             <div className="px-6 py-4">
-                                <div className="font-medium text-xl text-white text-center mb-2">{tool.label}</div>
-                                <p className="text-zinc-400 text-sm text-center">{tool.description}</p>
+                                <div className="font-medium text-lg text-white text-center mb-2">{tool.label}</div>
+                                <p className="text-zinc-400 text-xs text-center">{tool.description}</p>
                             </div>
 
                         </div>
