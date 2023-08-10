@@ -40,7 +40,7 @@ export const SignOutModal = () => {
       <Image className="animate-bounce"
         alt="Empty"
         fill
-        src="/ghost.png"
+        src="/juicy.svg"
       />
     </div>
     
@@ -51,12 +51,9 @@ export const SignOutModal = () => {
                 </DialogHeader>
                 <DialogFooter>
                     <SignOutButton>
-                    <Button variant={"ndoto"} size="lg" className="w-full font-bold">
-                        
+                    <Button variant={"ndoto"} size="lg" className="w-full font-bold" onClick={proModal.onClose}>
                         <Power className="w-4 h-4 mr-2" />
                         Continue to Logging Out
-
-
                     </Button>
                     </SignOutButton>
                 </DialogFooter>
