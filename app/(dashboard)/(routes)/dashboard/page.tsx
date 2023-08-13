@@ -54,7 +54,7 @@ const tools = [
     {
         label: "LeaderBoard",
         icon: Settings2Icon,
-        href: "/settings",
+        href: "/leaderboard",
         image: "/leader.png",
         color: "text-white",
         bgColor: "bg-[#202020]",

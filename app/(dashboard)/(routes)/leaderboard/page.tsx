@@ -203,6 +203,9 @@ const LeaderboardPage: React.FC = () => {
                                     Last Played
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Status
+                                 </TableHead>
+                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Total Score
                                  </TableHead>
 
@@ -228,6 +231,9 @@ const LeaderboardPage: React.FC = () => {
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
                       {formatDate(ranking.lastPlayedDate)} {/* Format and display last played date */}
+                    </TableCell>
+                    <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
+                       <span className='bg-gradient-to-r from-red-500 to-red-800 p-1 rounded-sm text-sm font-bold text-black'>Active</span>
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 font-bold">
                       {ranking.score} Pts {/* Display total score */}

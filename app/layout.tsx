@@ -1,6 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter, Montserrat, Open_Sans } from 'next/font/google'
+import { Inter, Montserrat, Open_Sans, Outfit } from 'next/font/google'
 import { ClerkProvider } from '@clerk/nextjs'
 import { Nunito } from 'next/font/google'
 import { ModalProvider } from '@/components/modal-provider'
@@ -10,10 +10,10 @@ import { CrispProvider } from '@/components/crisp-provider'
 import { dark } from '@clerk/themes';
 
 
-const inter = Open_Sans({ subsets: ['latin'] })
+const inter = Outfit({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Ndoto Trivia',
+  title: 'Ndoto Trivia | Next-Gen Trivia Experience',
   description: 'Next-Gen Trivia Platform',
 }
 
