@@ -31,7 +31,10 @@ import {
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
-import { UserIcon } from 'lucide-react';
+import { GitBranchPlus, Sparkles, UserIcon } from 'lucide-react';
+import AdminNavbar from '@/components/admin/admin-navbar';
+import { Heading } from '@/components/admin/admin-heading';
+
 
 
 interface Result {
@@ -42,21 +45,31 @@ interface Result {
 
 const LeaderboardPage: React.FC = () => {
 
-  
+
    return (
-      <div className="px-5 py-10 text-white items-center justify-center">
-         <h1 className="text-2xl font-bold mb-2 text-center">Hi, Admin!</h1>
-         <div className="mb-4 space-y-2">
-            <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-               Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
-            </h2>
-            <p className="text-white font-normal text-sm md:text-lg text-center">
-               You are an administrator
-            </p>
+      <div>
+         <AdminNavbar />
+         <div className='flex-1 space-y-4 p-8 pt-6'>
+            <div className='flex items-center justify-between'>
+         <Heading
+           icon={Sparkles}
+           iconColor='text-white'
+           bgColor='transparent'
+            title="Overview"
+            description='Analyze Users and More'
+         />
+          <Button variant={'ndoto'} className='font-extrabold text-lg'>
+         <GitBranchPlus className='mr-2' />
+            Create Trivia
+         </Button>
+        
+         </div>
          </div>
 
-                     </div>
-                 
+
+      </div>
+
+
    );
 };
 
