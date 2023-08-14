@@ -5,13 +5,16 @@ import { useAuth } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
 import TypewriterComponent from "typewriter-effect";
-import { Sparkles, SparklesIcon } from "lucide-react";
+import { MenuIcon, Sparkles, SparklesIcon } from "lucide-react";
 
 export const LandingHero = () => {
   const { isSignedIn } = useAuth();
 
+  const url = "/woman.jpg";
+  // style={{ backgroundImage:`url(${url})`}}
+
   return (
-    <div className="text-white font-bold py-36 text-center space-y-5">
+    <div className=" border border-gray-800 text-white rounded-sm font-bold py-36 text-center space-y-5 bg-transparent">
        <div className="text-3xl">
          Play, Win and Repeat!
         </div>
@@ -31,6 +34,7 @@ export const LandingHero = () => {
            
           </Button>
         </Link>
+       
       </div>
       <div className="text-white opacity-50 text-xs md:text-sm font-normal">
         Brought to you by <Link

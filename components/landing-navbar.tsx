@@ -24,9 +24,14 @@ export const LandingNavbar = () => {
     return (
         <nav className="p-4 bg-transparent flex items-center justify-between">
             <Link href="/" className="flex items-center">
-                {/* <div className="relative h-8 w-8 mr-4">
-            
-                </div> */}
+                <div className="relative h-8 w-8 mr-4">
+                <Image className="animate-pulse"
+            alt="icon"
+             fill
+              src="/icon.png"
+               />
+
+                </div>
                 <h1 className={cn("text-2xl font-bolder text-white", font.className)}>
                      Ndoto<span className="text-transparent font-bolder bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia.</span>
                 </h1>
