@@ -13,14 +13,14 @@ export const EmptyMusic= ({
     return (
         <div className="h-full p-20 flex flex-col items-center justify-center">
           <div className="relative h-72 w-72 mb-2">
-            <Image className="animate-pulse"
+            <Image className="animate-bounce"
             alt="Empty"
              fill
-              src="/music.svg"
+              src="/juicy.svg"
                />
 
         </div>
-        <p className="text-muted-foreground text-sm text-center ">
+        <p className="text-zinc-600 text-sm text-center ">
             {label}
         </p>
         </div>

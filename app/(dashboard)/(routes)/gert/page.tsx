@@ -17,6 +17,7 @@ import prismadb from '@/lib/prismadb';
 import { ok } from 'assert';
 import { useRouter } from 'next/navigation';
 import { Spinner } from '@/components/spinner';
+import { EmptyMusic } from '@/components/empty-music';
 
 
 
@@ -112,9 +113,11 @@ const nextQuestion = async () => {
     setActiveQuestion(0);
     setShowResult(true);
 
-    // Prepare the payload for sending the score
+    const bonus = 5;
+
+    // Prepare the payload for sending the score, also adding bonus of 5..
     const scorePayload = {
-      score: result.score,
+      score: result.score + bonus ,
       showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
       timestamp: new Date().toISOString(),
       userName:user?.fullName || "Anonymous User",
@@ -178,7 +181,7 @@ const nextQuestion = async () => {
   
   // const overallPercentage = (result.correctAnswers / questions.length) * 100;
   const overallPercentage = Math.round((result.correctAnswers / questions.length) * 100);
-
+ 
 
 
   return (
@@ -198,9 +201,12 @@ const nextQuestion = async () => {
         </div>
       ) : (
         <>
-      <h2 className='text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
+     
 
       {questions.length > 0 && !showResult && (
+        <div>
+         <h2 className='text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
+       
         <Card className="rounded-lg mt-5 border-red shadow-lg ">
           <CardHeader>
             <CardTitle className="text-zinc-400">
@@ -231,6 +237,12 @@ const nextQuestion = async () => {
             )}
           </CardFooter>
         </Card>
+        </div>
+      )}
+
+{questions.length === 0 && !showResult && (
+ 
+         <EmptyMusic label="Unfortunately, there isn't any Trivia Questions created yet! come back soon:)" />
       )}
 
       {showResult && (

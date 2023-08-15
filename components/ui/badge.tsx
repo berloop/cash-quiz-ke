@@ -15,6 +15,7 @@ const badgeVariants = cva(
         destructive:
           "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80",
         outline: "text-foreground",
+        ndoto:"bg-gradient-to-r from-red-500 to-red-800 border-none text-white rounded-sm ",
         fumarite:"bg-gradient-to-r to-[#ff4d4d] from-[#f9cb28]  hover:shadow-lg"
       },
     },

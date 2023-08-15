@@ -16,6 +16,7 @@ import { EmptyCode } from '@/components/empty-code';
 import { UserAvatar } from '@/components/user-avatar';
 import { formatDate, formatRelativeTime, randomizePercentage } from '@/lib/functions';
 import { getRankings } from '@/lib/ranking';
+import Image from "next/image";
 
 
 
@@ -31,9 +32,18 @@ import {
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
-import { GitBranchPlus, Sparkles, UserIcon } from 'lucide-react';
+import { AwardIcon, BarChart2, CrownIcon, EyeIcon, GitBranchPlus, Sparkles, Trophy, UserIcon, Users2Icon } from 'lucide-react';
 import AdminNavbar from '@/components/admin/admin-navbar';
 import { Heading } from '@/components/admin/admin-heading';
+import { AdminNav } from '@/components/admin/admin-nav';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AdminOverview } from '@/components/admin/admin-overview';
+import { AdminRecentSales } from '@/components/admin/admin-recent';
+import { Sidebar } from '@/components/sidebar';
+import RankingsTable from '@/components/admin/admin-users';
+import Link from 'next/link';
+
+
 
 
 
@@ -45,31 +55,81 @@ interface Result {
 
 const LeaderboardPage: React.FC = () => {
 
+   const { user } = useUser();
+
 
    return (
-      <div>
-         <AdminNavbar />
-         <div className='flex-1 space-y-4 p-8 pt-6'>
-            <div className='flex items-center justify-between'>
-         <Heading
-           icon={Sparkles}
-           iconColor='text-white'
-           bgColor='transparent'
-            title="Overview"
-            description='Analyze Users and More'
-         />
-          <Button variant={'ndoto'} className='font-extrabold text-lg'>
-         <GitBranchPlus className='mr-2' />
-            Create Trivia
-         </Button>
+      <div className='text-white mt-5'>
+    <h1 className="text-xl text-zinc-400 font-bold mb-2 ml-8">Hi, {user?.fullName || "Admin"},</h1>
+         <div className="mb-4 space-y-2 ml-8">
+            <h2 className="text-2xl md:text-4xl text-white font-bold">
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span> - Admin Console
+            </h2>
+           
+            <p className="text-white font-normal text-sm md:text-lg text-zinc-400">
+               Here you can view user analytics, create trivia and more.
+            </p>
+            <div className="flex-1 text-xs text-zinc-400">
+                   <Link href="/create">
+          <Button variant="ndoto" className="md:text-lg p-4 md:p-6 rounded-lg font-bold text-black">
+          <Sparkles className="mr-2 h-5 w-5 fill-black" /> 
+          Create Trivia
+           
+          </Button>
+        </Link>
+                   </div>
+         </div>
+         
+      
         
-         </div>
-         </div>
+               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 px-4">
+               <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    Users Analytics
+                   
+                  </CardTitle>
+                  
 
+                  <Users2Icon
+                    className='h-8 w-8 text-red-800'
 
-      </div>
+                  />
+                  
+                </CardHeader>
+                <CardContent>
+                <hr className='mb-3 px-5 border-red-800'></hr>
+                  <div className="mb-4 justify-center flex">
+                    <AdminOverview />
+                  </div>
 
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-normal font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                    Elite Players 
+                  
+                  </CardTitle>
 
+                  <Trophy
+                    className='h-8 w-8 text-red-800'
+
+                  />
+                </CardHeader>
+                <CardContent>
+              
+                <div className="">
+                     <RankingsTable />
+                  </div>
+
+                </CardContent>
+              </Card>
+              
+
+</div>
+        
+</div>
    );
 };
 

@@ -22,8 +22,9 @@ const buttonVariants = cva(
         fumar:"bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%",
         // fumarite:"bg-gradient-to-r to-yellow-200 via-yellow-300 from-yellow-400 hover:shadow-lg"
         fumarite:"bg-gradient-to-r to-[#ff4d4d] from-[#f9cb28]  hover:shadow-lg",
-        ndoto:" bg-gradient-to-r from-red-500 to-red-800 hover:shadow-lg",
-        ndotored:" bg-gradient-to-r from-red-900 via-red to-black hover:shadow-lg"
+        ndoto:" bg-gradient-to-l from-red-500 to-red-800 hover:shadow-lg",
+        ndotored:" bg-gradient-to-r from-red-900 via-red to-black hover:shadow-lg",
+        admin:" bg-[#2A0808] hover:shadow-lg border-2 border-[#ed2324]"
       },
       size: {
         default: "h-10 px-4 py-2",

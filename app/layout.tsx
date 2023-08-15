@@ -8,6 +8,7 @@ import { ToasterProvider } from '@/components/toaster-provider'
 import { CrispProvider } from '@/components/crisp-provider'
 
 import { dark } from '@clerk/themes';
+import { AdminModalProvider } from '@/components/admin/admin-modal-provider'
 
 
 const inter = Outfit({ subsets: ['latin'] })

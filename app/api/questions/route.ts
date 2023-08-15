@@ -10,7 +10,13 @@ export async function GET() {
   try {
 
 
-    const questions = await prismadb.triviaQuestion.findMany();
+    // const questions = await prismadb.triviaQuestion.findMany();
+
+    const questions = await prismadb.triviaQuestion.findMany({
+      where: {
+        showName: "Gert" // Specify the condition for filtering rows
+      }
+    });
     return NextResponse.json(questions);
 
   } catch (error) {
