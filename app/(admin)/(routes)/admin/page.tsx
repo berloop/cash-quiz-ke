@@ -63,7 +63,7 @@ const LeaderboardPage: React.FC = () => {
     <h1 className="text-xl text-zinc-400 font-bold mb-2 ml-8">Hi, {user?.fullName || "Admin"},</h1>
          <div className="mb-4 space-y-2 ml-8">
             <h2 className="text-2xl md:text-4xl text-white font-bold">
-               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span> - Admin Console
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia:</span> Admin Console
             </h2>
            
             <p className="text-white font-normal text-sm md:text-lg text-zinc-400">

@@ -3,6 +3,7 @@ import AdminNavbar from "@/components/admin/admin-navbar-new";
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import Navbar from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { Toaster } from "@/components/ui/toaster";
 
 
 
@@ -25,6 +26,7 @@ const AdminDashboardLayout = async ({
         <main className="md:pl-72">
       <AdminNavbar />
       <AdminModalProvider />
+      <Toaster />
         {children}
         </main>
       </div>

@@ -24,3 +24,6 @@ export const formatRelativeTime = (dateString: string) => {
     const percentage = (randomNumber / 100).toFixed(2);
     return `${percentage}%`;
   };
+
+  
+    
