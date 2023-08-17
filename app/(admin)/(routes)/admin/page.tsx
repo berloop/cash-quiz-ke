@@ -9,7 +9,7 @@ import {
    CardTitle,
 } from "@/components/ui/card"
 import { Button } from '@/components/ui/button';
-import { auth, useUser } from '@clerk/nextjs';
+import { auth, useOrganization, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Spinner } from '@/components/spinner';
 import { EmptyCode } from '@/components/empty-code';
@@ -42,6 +42,9 @@ import { AdminRecentSales } from '@/components/admin/admin-recent';
 import { Sidebar } from '@/components/sidebar';
 import RankingsTable from '@/components/admin/admin-users';
 import Link from 'next/link';
+import router from 'next/router';
+import { EmptyMusic } from '@/components/empty-music';
+import { EmptyImposter } from '@/components/admin/admin-imposter';
 
 
 
@@ -53,9 +56,43 @@ interface Result {
    wrongAnswers: number;
 }
 
-const LeaderboardPage: React.FC = () => {
+const AdminOverviewPage: React.FC = () => {
 
    const { user } = useUser();
+   
+   
+   
+   const {
+    membership,
+    isLoaded,
+  } = useOrganization();
+   
+  const role = membership?.role;
+
+  const router = useRouter();
+
+  if (role !== "admin") {
+    // User is a admin...
+    return (
+      <div className='mt-12'> 
+    <EmptyImposter label="We've detected you aren't an Administrator, If you are, then switch workspace to activate!" />
+    </div>
+
+    );
+   
+  }
+
+  
+
+  // const { membershipList} = useOrganization({
+  //   membershipList: {},
+  // });
+
+  // if (!membershipList) {
+  //   // loading state
+  //   return null;
+  // }
+   
 
 
    return (
@@ -69,6 +106,22 @@ const LeaderboardPage: React.FC = () => {
             <p className="text-white font-normal text-sm md:text-lg text-zinc-400">
                Here you can view user analytics, create trivia and more.
             </p>
+            <div>
+            {/* <ul>
+        {membershipList?.map((membership) => (
+          <li key={membership.id}>
+            {membership.publicUserData.firstName} 
+            {membership.publicUserData.lastName} &lt;
+            {membership.publicUserData.identifier}
+            &gt; ::\\ {membership.role}
+          </li>
+        ))}
+      </ul> */}
+              
+            </div>
+         
+      
+    
             <div className="flex-1 text-xs text-zinc-400">
                    <Link href="/create">
           <Button variant="ndoto" className="md:text-lg p-4 md:p-6 rounded-lg font-bold text-black">
@@ -133,4 +186,4 @@ const LeaderboardPage: React.FC = () => {
    );
 };
 
-export default LeaderboardPage;
+export default AdminOverviewPage;

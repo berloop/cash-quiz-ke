@@ -127,10 +127,10 @@ const GertPage: React.FC = () => {
         score: result.score + bonus,
         showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
         timestamp: new Date().toISOString(),
-        userName: user?.fullName || "Anonymous User",
-        userFirstName: user?.firstName || "Anonymous User",
+        userName: user?.fullName || "TriviaBot",
+        userFirstName: user?.firstName || "TriviaBot",
         userEmail: user?.primaryEmailAddress?.emailAddress || "Anonymous User",
-        userLastName: user?.lastName || "Anonymous User"
+        userLastName: user?.lastName || "Doe"
 
 
       };
@@ -267,7 +267,7 @@ const GertPage: React.FC = () => {
                   <div className='flex items-center justify-center mb-2'>
 
                     <div className=' rounded-lg '>
-                      <div className='text-9xl tracking-normal text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold  space-y-4'><CountUp end={result.score} /><span className='text-sm'>Pts.</span></div>
+                      <div className='text-9xl tracking-normal text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold  space-y-4 '><CountUp end={result.score} /><span className='text-sm'>Pts.</span></div>
 
                     </div>
 
