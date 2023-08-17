@@ -209,13 +209,7 @@ const CreatePage: React.FC = () => {
                             </div>
 
                             <div className="mb-4">
-                                {/* <label className="block text-white font-medium mb-2">
-                                    Answer
-                                </label>
-                                <input
-                                    className="w-full p-2 rounded-md bg-black text-white border border-gray-600"
-                                    {...form.register('answer')}
-                                /> */}
+                               
                                  <FormField
                                     name="answer"
                                     render={({ field }) => (
@@ -240,14 +234,6 @@ const CreatePage: React.FC = () => {
                                 />
                             </div>
                             <div className="mb-4">
-                                {/* <label className="block text-white font-medium mb-2">
-                                    Show Name
-                                </label>
-                                <input
-                                    className="w-full p-2 rounded-md bg-black text-white border border-gray-600"
-                                    {...form.register('showName')}
-                                /> */}
-
                                  <FormField
                                     name="showName"
                                     render={({ field }) => (
