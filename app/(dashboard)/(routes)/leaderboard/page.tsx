@@ -32,6 +32,7 @@ import {
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { UserIcon } from 'lucide-react';
+import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 
 
 interface Result {
@@ -149,7 +150,7 @@ const LeaderboardPage: React.FC = () => {
          {loading ? (
             // Show the spinner while loading
             <div className="flex items-center justify-center">
-               <Spinner />
+                <AdminRankingSpinner />
             </div>
          ) : (
             // Show the stats content when not loading

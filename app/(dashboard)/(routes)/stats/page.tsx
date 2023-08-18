@@ -25,6 +25,8 @@ import { BarChart2, CalendarCheck, CalendarDays, User2Icon } from 'lucide-react'
 import { UserAvatar } from '@/components/user-avatar';
 import Image from "next/image";
 import { formatDate, formatRelativeTime, randomizePercentage } from '@/lib/functions';
+import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
+import { UserStatsSpinner } from '@/components/user-stats-spinner';
 
 
 
@@ -111,7 +113,7 @@ const StatsPage: React.FC = () => {
       {loading ? (
         // Show the spinner while loading
         <div className="flex items-center justify-center">
-          <Spinner />
+         <UserStatsSpinner />
         </div>
       ) : (
         // Show the stats content when not loading

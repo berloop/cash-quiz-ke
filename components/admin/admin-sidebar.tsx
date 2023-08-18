@@ -10,6 +10,9 @@ import { usePathname } from "next/navigation";
 import { SignOutter } from "@/components/sign-outter";
 import { Badge } from "@/components/ui/badge";
 import { AdminSignOutter } from "@/components/admin/admin-signoutter";
+import { useOrganizationList } from "@clerk/nextjs";
+import { AdminNavbarSpinner } from "./admin-navbar-spinner";
+import { Separator } from "../ui/separator";
 
 
 const poppins = Nunito({
@@ -110,11 +113,105 @@ const linksRoutes = [
 ];
 
 
+
+
+const lockModeRoutes = [
+    {
+        label: "Trivia Playground",
+        icon: Dices,
+        href: "/dashboard",
+        color: "text-zinc-400",
+    },
+   
+   
+    {
+        label: "Manage Profile",
+        icon: ShieldCheck,
+        href: "/profile",
+        color: "text-zinc-400",
+    },
+
+    
+    
+   
+
+];
+
+
 export const AdminSidebar = () => {
     const pathname = usePathname();
+    const { organizationList, isLoaded } = useOrganizationList();
+   
+    if (!isLoaded) {
+        // Any loading state
+        return <AdminNavbarSpinner />;
+    }
+
 
     return (
+        <div>
+        {organizationList.length === 0 ? (
+            //if you don't belong to any organization..(not an admin)
         <div className="space-y-4 py-4 flex flex-col h-full  text-zinc-400 overflow-y-auto">
+          
+            <div className="px-3 py-2 flex-1">
+                
+                <Link href="/dashboard" className="
+             flex items-center pl-3 mb-8">
+                    
+                    <div className={cn("text-2xl mt-3 text-white font-bold")}>Ndoto<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia&trade;</span>
+                    {/* <span className="text-xs bg-gradient-to-l p-1 mb-5 from-red-500 to-red-800 rounded-sm text-black font-bold">Admin</span> */}
+                 </div> 
+                  {/* <Badge className="text-xs  font-bold" variant={"ndoto"}>
+                                Admin
+                            </Badge> */}
+                  
+                </Link>
+                <div className="px-2 py-3 flex-1">
+                    <p className="font-bold text-sm  text-zinc-400">Lock Mode Active</p>
+                </div>
+                <hr className="border-white/10 px-3 mb-2 flex-1"></hr>
+                <div className="px-2 py-3 flex-1">
+                    <p className="font-bold text-xs uppercase text-[#424040]">LOCK MODE</p>
+                </div>
+
+                {/* //setting active link on sidebar */}
+                <div className="space-y-1">
+                    {lockModeRoutes.map((route) => (
+                        <Link
+                            href={route.href}
+                            key={route.href}
+                            className={cn("text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
+                                pathname === route.href ? "text-white bg-gradient-to-r from-red-900 via-black to-black" : "text-zinc-400")}
+                        >
+                            <div className="flex items-center flex-1">
+                                <route.icon className={cn("h-5 w-5 mr-3 text-[#ed2324]", route.color)} />
+                                {route.label}
+                            </div>
+
+                        </Link>
+                    ))}
+                </div>
+                
+                <hr className="border-white/10 px-3 mb-1 flex-1"></hr>
+              
+
+               
+               
+               
+       
+
+
+            </div>
+
+            <AdminSignOutter />
+       
+
+        </div>
+           ) : (
+             //if you are an admin
+            <div className="space-y-4 py-4 flex flex-col h-full  text-zinc-400 overflow-y-auto">
+          
             <div className="px-3 py-2 flex-1">
                 
                 <Link href="/admin" className="
@@ -200,9 +297,14 @@ export const AdminSidebar = () => {
 
             
 
-        <AdminSignOutter />
+            <div className="mt-auto">
 
-
+            <AdminSignOutter />
+            </div>
         </div>
+        
+          )}
+          </div>
+
     );
 }

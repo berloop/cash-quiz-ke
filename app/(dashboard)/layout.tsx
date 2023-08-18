@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import { Sidebar } from "@/components/sidebar";
+import { Toaster } from "@/components/ui/toaster";
 
 
 
@@ -20,6 +21,7 @@ const DashBoardLayout = async ({
         </div>
         <main className="md:pl-72">
       <Navbar />
+      <Toaster />
         {children}
         </main>
       </div>

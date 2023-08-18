@@ -25,6 +25,10 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, TableCaption } from '@/components/ui/table';
 import { Airplay, Table } from 'lucide-react';
 import CountUp from 'react-countup';
+import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
+import { UserQuestionSpinner } from '@/components/questions-spinner';
+import { ToastAction } from '@/components/ui/toast';
+import { playNotification, showErrorToast, showSuccessToast } from '@/lib/functions';
 
 
 
@@ -41,6 +45,8 @@ const GertPage: React.FC = () => {
 
   const { user } = useUser();
   user?.fullName
+
+
 
 
   const [questions, setQuestions] = useState<any[]>([]);
@@ -77,11 +83,13 @@ const GertPage: React.FC = () => {
   //   return <Spinner />;
   // }
 
+
   const correctAnswer = questions[activeQuestion]?.answer;
 
   const onAnswerSelected = (option: string, idx: number) => {
     setChecked(true);
     setSelectedAnswerIndex(idx);
+    
 
     if (option.trim() === correctAnswer.trim()) {
       setSelectedAnswer(option);
@@ -141,11 +149,15 @@ const GertPage: React.FC = () => {
 
 
         console.log(response.data);
+        playNotification();
         toast.success('Score saved successfully!');
+        showSuccessToast();
+      
       } catch (error: any) {
         console.error('Error sending score:', error);
         console.log(scorePayload);
-        toast.error('Oops! Something went wrong while saving the score.');
+        // toast.error('Oops! Something went wrong while saving the score.');
+        showErrorToast();
       } finally {
         // Optionally, you can reload the page after sending the score
         router.refresh();
@@ -201,10 +213,11 @@ const GertPage: React.FC = () => {
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
           Play, Win, Repeat on Gert Trivia!
         </p>
+        <Button onClick={playNotification} variant={"admin"}>Test Audio</Button>
       </div>
       {loadingQuestions ? (
         <div className="flex items-center justify-center">
-          <Spinner />
+          <UserQuestionSpinner />
         </div>
       ) : (
         <>

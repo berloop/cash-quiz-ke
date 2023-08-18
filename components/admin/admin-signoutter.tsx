@@ -9,7 +9,7 @@ export const AdminSignOutter = () => {
     return (
         <div className="px-3">
             <Button onClick={proModal.onOpen} className="w-full p-3 justify-start font-bold rounded-lg" variant={"ghost"}>
-                <Power className="h-5 w-5 mr-3" />  Log Out </Button>
+                <Power className="h-5 w-5 mr-3" />  End Session </Button>
         </div>
     )
 }

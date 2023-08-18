@@ -1,8 +1,17 @@
-
-import { UserButton } from "@clerk/nextjs";
+"use client";
+import { UserButton, auth, useUser } from "@clerk/nextjs";
 import MobileSidebar from "@/components/mobile-sidebar";
+import { AdminNavbarSpinner } from "./admin/admin-navbar-spinner";
 
-const Navbar = async () => {
+const Navbar = () => {
+
+    const { isLoaded } = useUser();
+
+    if (!isLoaded) {
+        // Any loading state
+        return <AdminNavbarSpinner />;
+      }
+
     
 
     return (

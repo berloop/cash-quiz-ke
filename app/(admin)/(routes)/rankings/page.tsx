@@ -9,7 +9,7 @@ import {
    CardTitle,
 } from "@/components/ui/card"
 import { Button } from '@/components/ui/button';
-import { auth, useUser } from '@clerk/nextjs';
+import { auth, useOrganization, useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { Spinner } from '@/components/spinner';
 import { EmptyCode } from '@/components/empty-code';
@@ -34,6 +34,7 @@ import { Input } from "@/components/ui/input"
 import { UserIcon } from 'lucide-react';
 import { AdminSpinner } from '@/components/admin/admin-loader';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
+import { EmptyImposter } from '@/components/admin/admin-imposter';
 
 
 interface Result {
@@ -130,6 +131,28 @@ const RankingsPage: React.FC = () => {
 
    const randomNum = Math.floor(Math.random() * 2900) + 1;
    const randomizedPercentage = randomizePercentage(randomNum);
+
+
+   
+   
+   const {
+      membership,
+      isLoaded,
+    } = useOrganization();
+     
+    const role = membership?.role;
+  
+   
+    if (role !== "admin") {
+      // User is a admin...
+      return (
+        <div className='mt-12'> 
+      <EmptyImposter label="We've detected you aren't an Administrator, If you are, then switch workspace to activate!" />
+      </div>
+  
+      );
+     
+    }
 
    // const statsCount = stats.length;
 
