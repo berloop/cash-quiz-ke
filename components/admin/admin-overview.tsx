@@ -1,55 +1,57 @@
 "use client"
 
+
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts"
+
 
 const data = [
   {
     name: "Jan",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 2,
   },
   {
     name: "Feb",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 234,
   },
   {
     name: "Mar",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 334,
   },
   {
     name: "Apr",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 453,
   },
   {
     name: "May",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 1643,
   },
   {
     name: "Jun",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 2000,
   },
   {
     name: "Jul",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 564,
   },
   {
     name: "Aug",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 400,
   },
   {
     name: "Sep",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 2174,
   },
   {
     name: "Oct",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 3242,
   },
   {
     name: "Nov",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 5232,
   },
   {
     name: "Dec",
-    total: Math.floor(Math.random() * 50) + 10,
+    total: 5700,
   },
 ]
 

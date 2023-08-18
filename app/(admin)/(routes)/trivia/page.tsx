@@ -31,10 +31,11 @@ import {
 
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
-import { UserIcon } from 'lucide-react';
+import { CircleDashed, UserIcon } from 'lucide-react';
 import { AdminSpinner } from '@/components/admin/admin-loader';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { EmptyImposter } from '@/components/admin/admin-imposter';
+import { getAllTriviaQuestions } from '@/lib/get-all-trivia';
 
 
 interface Result {
@@ -43,13 +44,13 @@ interface Result {
    wrongAnswers: number;
 }
 
-const RankingsPage: React.FC = () => {
+const AllTriviaPage: React.FC = () => {
 
    const { user } = useUser();
    user?.fullName
 
 
-   const [rankings, setRankings] = useState<any[]>([]);
+   const [trivias, setTrivias] = useState<any[]>([]);
    const [selectedAnswer, setSelectedAnswer] = useState<string | boolean>('');
    const [activeRank, setActiveRanking] = useState(0);
    const [checked, setChecked] = useState(false);
@@ -58,8 +59,8 @@ const RankingsPage: React.FC = () => {
    const [showResult, setShowResult] = useState(false);
    const [table, setTable] = useState<any>(null);
    const [filterValue, setFilterValue] = useState<string>('');
-   const [filteredRankings, setFilteredRankings] = useState<any[]>(rankings);
-   const [sortedRankings, setSortedRankings] = useState<any[]>([]);
+   const [filteredTrivia, setFilteredTrivia] = useState<any[]>(trivias);
+   const [sortedTrivia, setSortedTrivia] = useState<any[]>([]);
    const [result, setResult] = useState<Result>({
       score: 0,
       correctAnswers: 0,
@@ -74,41 +75,32 @@ const RankingsPage: React.FC = () => {
    // }, []);
 
    useEffect(() => {
-      fetchRankings().then((rankingsData) => {
-        setRankings(rankingsData);
-        setFilteredRankings(rankingsData);
-        setSortedRankings(rankingsData.slice().sort((a: { score: number; }, b: { score: number; }) => b.score - a.score));
+      fetchTrivias().then((triviasData) => {
+        setTrivias(triviasData);
+        setFilteredTrivia(triviasData);
+        setSortedTrivia(triviasData.slice().sort((a: { score: number; }, b: { score: number; }) => b.score - a.score));
       });
    }, []);
 
    useEffect(() => {
       if (filterValue === '') {
-         setFilteredRankings(sortedRankings);
+         setFilteredTrivia(sortedTrivia);
       } else {
-         const filtered = sortedRankings.filter((ranking) =>
-            ranking.userEmail.toLowerCase().includes(filterValue.toLowerCase())
+         const filtered = sortedTrivia.filter((trivia) =>
+            trivia.showName.toLowerCase().includes(filterValue.toLowerCase())
          );
-         setFilteredRankings(filtered);
+         setFilteredTrivia(filtered);
       }
-   }, [filterValue, sortedRankings]);
+   }, [filterValue, sortedTrivia]);
 
 
-   // const fetchRankings = async () => {
-   //    try {
-   //       const rankingsData = await getRankings();
-   //       setRankings(rankingsData);
-   //    } catch (error) {
-   //       console.error('Error fetching user stats', error);
-   //    } finally {
-   //       setLoading(false);
-   //    }
-   // };
+ 
 
    const filterRankings = () => {
-      const filtered = rankings.filter((ranking) =>
-        ranking.userEmail.toLowerCase().includes(filterValue.toLowerCase())
+      const filtered = trivias.filter((trivia) =>
+        trivia.showName.toLowerCase().includes(filterValue.toLowerCase())
       );
-      setFilteredRankings(filtered);
+      setFilteredTrivia(filtered);
     };
     
     useEffect(() => {
@@ -116,9 +108,9 @@ const RankingsPage: React.FC = () => {
     }, [filterValue]);
     
 
-   const fetchRankings = async () => {
+   const fetchTrivias = async () => {
       try {
-        const rankingsData = await getRankings();
+        const rankingsData = await getAllTriviaQuestions();
         return rankingsData; // Return the fetched data
       } catch (error) {
         console.error('Error fetching user stats', error);
@@ -161,15 +153,20 @@ const RankingsPage: React.FC = () => {
 
    return (
       <div className="px-5 py-10 text-white">
-         <h1 className="text-2xl font-bold mb-2 text-center">Hi, {user?.fullName || "Admin"}!</h1>
-         <div className="mb-4 space-y-2">
-         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia:</span> Admin Console
-                </h2>
-            <p className="text-white font-normal text-sm md:text-lg text-center">
-               Find ranking among trivia players.
+         <h1 className="text-xl text-zinc-400 font-bold mb-2 ml-8">Hi, {user?.fullName || "Admin"},</h1>
+         <div className=" space-y-2 ml-8">
+            <h2 className="text-2xl md:text-4xl text-white font-bold">
+               <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia:</span> Admin Console
+            </h2>
+           
+            <p className="font-normal text-sm md:text-lg text-zinc-400">
+               Here you can view all created trivia and more.
             </p>
+           
+         
+      
          </div>
+         
 
          {loading ? (
             // Show the spinner while loading
@@ -179,10 +176,10 @@ const RankingsPage: React.FC = () => {
          ) : (
             // Show the stats content when not loading
             <>
-               {rankings.length > 0 ? (
+               {trivias.length > 0 ? (
                   // Show the stats count when stats are available
                   <h2 className='text-transparent text-xs'>
-                     Stats {rankings.length}
+                     Stats {trivias.length}
                   </h2>
 
                ) : (
@@ -193,46 +190,45 @@ const RankingsPage: React.FC = () => {
 
                )}
 
-               {!showResult && rankings.length > 0 && (
+               {!showResult && trivias.length > 0 && (
                   //       
                   <div className="w-full">
                    
-                     <div className="flex items-center justify-center py-4">
+                     <div className="flex items-center justify-start py-4 pt-1 space-y-2 ml-8">
                       
                      <Input
-              placeholder="Search Player via Email..."
+              placeholder="Search a Trivia Question via its Show Name ..."
               className="max-w-sm bg-[#121212] text-zinc-400 border-[#3E3D3D]"
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
             />
                     
                      </div>
-                     <div className="border-zinc-400 rounded-sm p-7 shadow-lg bg-[#121212]">
+                     <div className="border-zinc-400 rounded-sm p-7 shadow-lg bg-[#121212] m-8 mt-2">
                         
                         <Table className='shadow-lg'>
                            <TableHeader>
                               <TableRow className='bg-[#1F1D1D] rounded-lg shadow-lg border-2 border-[#353434]'>
                                  <TableHead className='font-bold border-r border-white/10 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Position
+                                    S/N
                                  </TableHead>
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Full Name
+                                    Trivia Question
                                  </TableHead>
-                                 <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Email Address
-                                 </TableHead>
-                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Inception Date
+
+                                 <TableHead className='text-balance border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Multiple Choices
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Last Played
+                                    Answer
+                                 </TableHead>
+                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Show Name
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Status
                                  </TableHead>
-                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Total Score
-                                 </TableHead>
+                                
 
                               </TableRow>
 
@@ -240,29 +236,37 @@ const RankingsPage: React.FC = () => {
                         
                            <TableBody>
                            {/* {sortedRankings.map((ranking, index) => ( */}
-                           {filteredRankings.map((ranking, index) => (
+                           {filteredTrivia.map((trivia, index) => (
                   <TableRow key={index} className='border-white/10'>
-                    <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-400">
+                    <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-500">
                       #{index + 1}. {/* Display rank number */}
                     </TableCell>
-                    <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-400">
-                      {ranking.userFirstName} {ranking.userLastName} {/* Display full name */}
+                    <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-500">
+                      {trivia.question}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
-                      {ranking.userEmail} {/* Display email address */}
+                  
+
+                    <ul className="list-none text-balance pl-4 bg-[#201e1e] rounded-sm p-2 text-zinc-500 text-normal">
+    {trivia.options.map((option: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined, index: React.Key | null | undefined) => (
+     
+      <li key={index} className="flex items-center"> <CircleDashed size={10} className="mr-2 flex-shrink-0 mt-1" />
+      {option}
+    </li>
+    ))}
+  </ul>
                     </TableCell>
-                    <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
-                      {formatDate(ranking.firstPlayedDate)} {/* Format and display last played date */}
+                    <TableCell colSpan={1} className="h-2 text-balance text-zinc-500 border-r border-white/10">
+                       {trivia.answer}
                     </TableCell>
-                    <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
-                      {formatDate(ranking.lastPlayedDate)} {/* Format and display last played date */}
+                    <TableCell colSpan={1} className="h-2 text-center text-zinc-500 border-r border-white/10">
+                       {trivia.showName}
                     </TableCell>
-                    <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
-                    <span className='text-green-500 bg-green-950 border border-green-800 shadow-xl shadow-green-500/10 p-1 rounded-sm text-xs font-normal'>Active</span>
+                    
+                    <TableCell colSpan={1} className="h-2 text-center text-zinc-500 border-r border-white/10">
+                       <span className='text-green-500 bg-green-950 border border-green-800 shadow-xl shadow-green-500/10 p-1 rounded-sm text-xs font-normal'>Active</span>
                     </TableCell>
-                    <TableCell colSpan={1} className="h-2 text-center text-zinc-400 font-bold">
-                      {ranking.score} Pts {/* Display total score */}
-                    </TableCell>
+                    
                   </TableRow>
                 ))}
               </TableBody>
@@ -271,7 +275,7 @@ const RankingsPage: React.FC = () => {
                      </div>
                      <div className="flex items-center justify-end space-x-2 py-4">
                         <div className="flex-1 ml-3 text-xs text-zinc-400">
-                      ({rankings.length}) Data Rows Available
+                      ({trivias.length}) Data Rows Available
                         </div>
                         {/* <div className="space-x-2">
                            <Button
@@ -303,4 +307,4 @@ const RankingsPage: React.FC = () => {
    );
 };
 
-export default RankingsPage;
+export default AllTriviaPage;

@@ -173,10 +173,10 @@ const LeaderboardPage: React.FC = () => {
                   //       
                   <div className="w-full">
                    
-                     <div className="flex items-center flex justify-center items-center py-4">
+                     <div className="flex items-center justify-center py-4">
                       
                      <Input
-              placeholder="Filter emails..."
+              placeholder="Search Player via Email.."
               className="max-w-sm bg-[#121212] text-zinc-400 border-[#3E3D3D]"
               value={filterValue}
               onChange={(e) => setFilterValue(e.target.value)}
@@ -234,7 +234,7 @@ const LeaderboardPage: React.FC = () => {
                       {formatDate(ranking.lastPlayedDate)} {/* Format and display last played date */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
-                       <span className='bg-gradient-to-r from-red-500 to-red-800 p-1 rounded-sm text-sm font-bold text-black'>Active</span>
+                    <span className='text-green-500 bg-green-950 border border-green-800 shadow-xl shadow-green-500/10 p-1 rounded-sm text-xs font-normal'>Active</span>
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 font-bold">
                       {ranking.score} Pts {/* Display total score */}

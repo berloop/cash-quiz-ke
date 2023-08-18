@@ -31,8 +31,8 @@ export async function POST(
                 data: {
                   question:triviaPayload.question,
                   options:triviaPayload.options,
-                  answer:"Paris",
-                  showName:"Gert"
+                  answer:triviaPayload.answer,
+                  showName:triviaPayload.showName
     
                 },
               });

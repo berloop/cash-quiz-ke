@@ -28,7 +28,7 @@ import CountUp from 'react-countup';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { UserQuestionSpinner } from '@/components/questions-spinner';
 import { ToastAction } from '@/components/ui/toast';
-import { playNotification, showErrorToast, showSuccessToast } from '@/lib/functions';
+import { playNotification, showErrorToast, showSuccessToast, shuffleArray } from '@/lib/functions';
 
 
 
@@ -71,7 +71,8 @@ const GertPage: React.FC = () => {
   const fetchQuestions = async () => {
     try {
       const questionsData = await getTriviaQuestions();
-      setQuestions(questionsData);
+      const shuffledQuestions = shuffleArray(questionsData);
+      setQuestions(shuffledQuestions);
       setLoadingQuestions(false);
     } catch (error) {
       console.error('Error Fetching Questions', error);
@@ -84,13 +85,14 @@ const GertPage: React.FC = () => {
   // }
 
 
-  const correctAnswer = questions[activeQuestion]?.answer;
+ 
 
   const onAnswerSelected = (option: string, idx: number) => {
     setChecked(true);
     setSelectedAnswerIndex(idx);
     
-
+    const correctAnswer = questions[activeQuestion]?.answer;
+    
     if (option.trim() === correctAnswer.trim()) {
       setSelectedAnswer(option);
       console.log('Option Selected:', option)
@@ -213,7 +215,7 @@ const GertPage: React.FC = () => {
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
           Play, Win, Repeat on Gert Trivia!
         </p>
-        <Button onClick={playNotification} variant={"admin"}>Test Audio</Button>
+        {/* <Button onClick={playNotification} variant={"admin"}>Test Audio</Button> */}
       </div>
       {loadingQuestions ? (
         <div className="flex items-center justify-center">

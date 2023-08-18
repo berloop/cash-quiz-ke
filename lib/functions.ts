@@ -30,7 +30,7 @@ export const randomizePercentage = (randomNumber: number): string => {
 
 
 export const showSuccessToast = () => {
- 
+
   toast({
     className: "bg-[#121212] text-white border border-green-800 shadow-xl shadow-green-500/10",
     title: "Successfully saved your Trivia Score!",
@@ -54,7 +54,7 @@ export const showErrorToast = () => {
 
 export const playNotification = () => {
 
-  const audio = new Audio('/sound/score.mp3'); 
+  const audio = new Audio('/sound/score.mp3');
   audio.preload = 'auto';// Adjust the path
   audio.play();
 
@@ -64,8 +64,8 @@ export const playNotification = () => {
 export const shuffleArray = <T>(array: T[]): T[] => {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
 };

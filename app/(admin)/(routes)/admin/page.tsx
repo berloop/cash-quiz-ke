@@ -103,22 +103,10 @@ const AdminOverviewPage: React.FC = () => {
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia:</span> Admin Console
             </h2>
            
-            <p className="text-white font-normal text-sm md:text-lg text-zinc-400">
+            <p className=" font-normal text-sm md:text-lg text-zinc-400">
                Here you can view user analytics, create trivia and more.
             </p>
-            <div>
-            {/* <ul>
-        {membershipList?.map((membership) => (
-          <li key={membership.id}>
-            {membership.publicUserData.firstName} 
-            {membership.publicUserData.lastName} &lt;
-            {membership.publicUserData.identifier}
-            &gt; ::\\ {membership.role}
-          </li>
-        ))}
-      </ul> */}
-              
-            </div>
+           
          
       
     

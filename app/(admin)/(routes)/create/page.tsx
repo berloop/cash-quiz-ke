@@ -23,6 +23,7 @@ import { ToastAction } from "@/components/ui/toast"
 import { toast, useToast } from "@/components/ui/use-toast"
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
+import { playNotification } from '@/lib/functions';
 
 
 
@@ -100,8 +101,8 @@ const CreatePage: React.FC = () => {
             //sending the payload to our API endpoint..
             const response = await axios.post('/api/createtrivia', { triviaPayload });
 
-            
             console.log(response.data);
+            playNotification();
             console.log(values);
             showSuccessToast();
             form.reset();
