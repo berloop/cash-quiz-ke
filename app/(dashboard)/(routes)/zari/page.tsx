@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { getTriviaQuestions } from '@/lib/trivia-questions';
+import { getTriviaQuestions, getZariQuestions } from '@/lib/trivia-questions';
 import {
   Card,
   CardContent,
@@ -88,7 +88,7 @@ const GertPage: React.FC = () => {
 
   const fetchQuestions = async () => {
     try {
-      const questionsData = await getTriviaQuestions();
+      const questionsData = await getZariQuestions();
       const shuffledQuestions = shuffleArray(questionsData);
       setQuestions(shuffledQuestions);
       setLoadingQuestions(false);
@@ -263,7 +263,7 @@ const GertPage: React.FC = () => {
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
         </h2>
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
-          Play, Win, Repeat on Gert Trivia!
+          Play, Win, Repeat on Zari's Trivia!
         </p>
         {/* <Button onClick={playNotification} variant={"admin"}>Test Audio</Button> */}
       </div>

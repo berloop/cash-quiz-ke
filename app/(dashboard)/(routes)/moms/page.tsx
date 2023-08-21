@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { getTriviaQuestions } from '@/lib/trivia-questions';
+import { getMomQuestions, getTriviaQuestions, getZariQuestions } from '@/lib/trivia-questions';
 import {
   Card,
   CardContent,
@@ -88,7 +88,7 @@ const GertPage: React.FC = () => {
 
   const fetchQuestions = async () => {
     try {
-      const questionsData = await getTriviaQuestions();
+      const questionsData = await getMomQuestions();
       const shuffledQuestions = shuffleArray(questionsData);
       setQuestions(shuffledQuestions);
       setLoadingQuestions(false);
@@ -263,7 +263,7 @@ const GertPage: React.FC = () => {
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
         </h2>
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
-          Play, Win, Repeat on Gert Trivia!
+          Play, Win, Repeat on Zari's Trivia!
         </p>
         {/* <Button onClick={playNotification} variant={"admin"}>Test Audio</Button> */}
       </div>
@@ -294,7 +294,7 @@ const GertPage: React.FC = () => {
                       <li key={idx}
                         onClick={() => onAnswerSelected(option, idx)}
                         className={selectedAnswerIndex === idx ? "flex items-center px-4 py-2 border-dashed bg-[#1a251c] border-2 text-green-600 border-green-600 cursor-pointer rounded-sm font-bold transition" : "flex items-center px-4 py-2 bg-[#282727] text-zinc-300 cursor-pointer rounded-sm animate-pulse"}>
-                        <CircleDashed size={10} className="mr-2 flex-shrink-0 mt-0" /> <p className="max-w-full text-base break-words">{option}</p>
+                       <CircleDashed size={10} className="mr-2 flex-shrink-0 mt-0" /> <p className="max-w-full text-base break-words">{option}</p>
                       </li>
                     ))}
                   </ul>
@@ -332,13 +332,13 @@ const GertPage: React.FC = () => {
 
 
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 px-4 md:mt-10 select-none">
-
-              {/* Adding a confetti.. */}
+             
+             {/* Adding a confetti.. */}
               <Confetti
                 width={width}
                 height={height}
                 numberOfPieces={200}
-              // tweenDuration={10}
+                // tweenDuration={10}
               />
               <Card className='shadow-lg shadow-red-800/10'>
                 <CardHeader className='text-xl text-zinc-400 text-center font-bold'>

@@ -103,7 +103,7 @@ const DashboardPage = () => {
                     <Card
                         onClick={() => router.push(tool.href)}
                         key={tool.href}
-                        className="p-4 border-black flex-col items-center justify-center hover:shadow-lg transition cursor-pointer rounded-xl"
+                        className="p-4 flex-col items-center justify-center hover:shadow-lg  cursor-pointer rounded-xl border border-gray-800  shadow-xl transition hover:border-red-500/10 hover:shadow-red-500/10"
                         style={{ minWidth: "200px", flex: "1 1 300px" }}
                     >
                         <div className="max-w-sm rounded overflow-hidden">
