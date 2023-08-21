@@ -23,12 +23,13 @@ import { UserAvatar } from '@/components/user-avatar';
 import { ScoreAvatar } from '@/components/score-avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, TableCaption } from '@/components/ui/table';
-import { Airplay, Table } from 'lucide-react';
+import { Airplay, Table, Timer } from 'lucide-react';
 import CountUp from 'react-countup';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { UserQuestionSpinner } from '@/components/questions-spinner';
 import { ToastAction } from '@/components/ui/toast';
-import { playNotification, showErrorToast, showSuccessToast, shuffleArray } from '@/lib/functions';
+import { playClickSound, playNextSound, playNotification, showErrorToast, showSuccessToast, shuffleArray } from '@/lib/functions';
+import { Progress } from '@/components/ui/progress';
 
 
 
@@ -51,6 +52,21 @@ const GertPage: React.FC = () => {
 
   const [questions, setQuestions] = useState<any[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string | boolean>('');
+
+  const generateRandomTime = () => {
+    const minSeconds = 120;
+    const maxSeconds = 300;
+  
+    // Generate a random whole number between minSeconds and maxSeconds
+    const randomTime = Math.floor(Math.random() * (maxSeconds - minSeconds + 1)) + minSeconds;
+  
+    return randomTime;
+  };
+
+  //total time for this trivia Run....(in seconds)
+  const [totalTimeRemaining, setTotalTimeRemaining] =  useState(generateRandomTime());
+  
+
 
   const [activeQuestion, setActiveQuestion] = useState(0);
   // const [selectedAnswer, setSelectedAnswer] = useState('');
@@ -84,18 +100,34 @@ const GertPage: React.FC = () => {
   //   return <Spinner />;
   // }
 
-
+  useEffect(() => {
+    if (totalTimeRemaining > 0) {
+      const timerId = setInterval(() => {
+        setTotalTimeRemaining(prevTime => prevTime - 1);
+      }, 1000);
+      return () => clearInterval(timerId);
+    } else if (totalTimeRemaining === 0) {
+      // nextQuestion();
+      setShowResult(true);
+       // Automatically move to the next question
+      setSelectedAnswer(false); // Reset selectedAnswer for the next question
+      setTotalTimeRemaining(500); // Reset the total time remaining for the next question
+    }
+  }, [totalTimeRemaining]);
  
 
   const onAnswerSelected = (option: string, idx: number) => {
     setChecked(true);
     setSelectedAnswerIndex(idx);
+    playClickSound();
     
     const correctAnswer = questions[activeQuestion]?.answer;
     
     if (option.trim() === correctAnswer.trim()) {
       setSelectedAnswer(option);
       console.log('Option Selected:', option)
+      //adding a bonus time if you get right answer..
+      setTotalTimeRemaining(totalTimeRemaining + 2);
       console.log('Correct Answer:', correctAnswer)
       console.log('Status:', true)
     } else {
@@ -104,6 +136,8 @@ const GertPage: React.FC = () => {
       console.log('Correct Answer:', correctAnswer)
       console.log('Status:', false)
     }
+    setTotalTimeRemaining(totalTimeRemaining);
+    //adding 2 seconds to total timer....
   };
 
   const router = useRouter();
@@ -126,9 +160,12 @@ const GertPage: React.FC = () => {
 
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
+      playNextSound();
     } else {
       setActiveQuestion(0);
       setShowResult(true);
+
+      //play confetti or sound here....TODO
 
       const bonus = 5;
 
@@ -202,13 +239,14 @@ const GertPage: React.FC = () => {
 
   // const overallPercentage = (result.correctAnswers / questions.length) * 100;
   const overallPercentage = Math.round((result.correctAnswers / questions.length) * 100);
+  const totalAttemptedQuestion = result.wrongAnswers + result.correctAnswers;
 
 
 
   return (
-    <div className="px-5 py-10 text-white">
+    <div className="px-5 py-10 text-white select-none">
       <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName || "Friend:)"}.</h1>
-      <div className="mb-4 space-y-2">
+      <div className="mb-4 space-y-2 select-none">
         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
         </h2>
@@ -226,39 +264,49 @@ const GertPage: React.FC = () => {
 
 
           {questions.length > 0 && !showResult && (
-            <div>
-              <h2 className='text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
+            <div className='select-none'>
+              <h2 className='text-zinc-500 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
 
-              <Card className="rounded-lg mt-5 border-red shadow-lg ">
+              <Card className="rounded-lg mt-5 border-red shadow-red-500/10">
                 <CardHeader>
                   <CardTitle className="text-zinc-400">
-                    {questions[activeQuestion].question}
+                  {/* <span className='text-zinc-500 gap-4 rounded-sm text-xs font-medium bg-neutral-700 hidden md:inline'> Qn {activeQuestion + 1} </span>  */}
+                  {questions[activeQuestion].question}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <ul className="w-full text-sm font-medium space-y-2 border border-black p-3 rounded-lg">
+                  <ul className="w-full text-sm font-medium space-y-2  p-3 rounded-sm overflow-y-auto">
                     {questions[activeQuestion].options.map((option: string, idx: number) => (
 
                       <li key={idx}
                         onClick={() => onAnswerSelected(option, idx)}
-                        className={selectedAnswerIndex === idx ? "px-4 py-2 border border-red-600 bg-[#121212] cursor-pointer rounded-sm font-bold transition animate-pulse" : "px-4 py-2 border border-black cursor-pointer"}>
-                        <span className="text-base text-zinc-400">{option}</span>
+                        className={selectedAnswerIndex === idx ? "px-4 py-2 border-dashed bg-[#1a251c] border-2 text-green-600 border-green-600 cursor-pointer rounded-sm font-bold transition" : "px-4 py-2 bg-[#282727] text-zinc-300 cursor-pointer rounded-sm animate-pulse"}>
+                        <p className="max-w-full text-base break-words">{option}</p>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
                 <CardFooter>
                   {checked ? (
-                    <Button onClick={nextQuestion} variant="ndotored" className='text-base text-zinc-400 font-bold'>
+                    <Button onClick={nextQuestion} variant="admin" className='text-base text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>
                       {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
                     </Button>
                   ) : (
-                    <Button disabled variant="ndotored" className='text-base text-zinc-400 font-bold'>
+                    <Button disabled variant="admin" className='text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                       {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
                     </Button>
                   )}
                 </CardFooter>
               </Card>
+              <div className='flex items-center'>
+              <Timer className='w-5 h-5 text-red-800' />
+              <p className='font-medium text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 m-2 text-sm'>Time left: {totalTimeRemaining} Seconds</p>
+              </div>
+              
+              <Progress
+                           className="h-3 bg-[#121212] rounded-sm"
+                           value={totalTimeRemaining}
+                        />
             </div>
           )}
 
@@ -270,10 +318,10 @@ const GertPage: React.FC = () => {
           {showResult && (
 
 
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 px-4 md:mt-10">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2 px-4 md:mt-10 select-none">
               <Card className='shadow-lg shadow-red-800/10'>
                 <CardHeader className='text-xl text-zinc-400 text-center font-bold'>
-                  ⚡You have Finished Daily Trivia Run!
+                  ⚡You have Finished Daily Trivia Marathon!
 
                 </CardHeader>
 
@@ -325,10 +373,15 @@ const GertPage: React.FC = () => {
                     </div>
                     <Separator className='bg-zinc-800' />
                     <div className='flex justify-between items-center text-normal text-sm text-zinc-400 space-y-2'>
-                      <span>Total Number of Question</span>
+                      <span>Total Trivia Question(s)</span>
                       <span> <CountUp end={questions.length} />.</span>
                     </div>
                     <Separator className=' bg-zinc-800' />
+                    <div className='flex justify-between items-center text-normal text-sm text-zinc-400 space-y-2'>
+                      <span>Total Attempted Questions:</span>
+                      <span><CountUp end={totalAttemptedQuestion} />. </span>
+                    </div>
+                    <Separator className='bg-zinc-800' />
                     <div className='flex justify-between items-center text-normal text-sm text-zinc-400 space-y-2'>
                       <span>Incorrect Answers:</span>
                       <span><CountUp end={result.correctAnswers} />. </span>

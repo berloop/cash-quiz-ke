@@ -6,7 +6,7 @@ export const ScoreAvatar = () =>{
     const { user } = useUser();
 
     return (
-     <Avatar className="h-20 w-20 border-2 border-red-800 rounded-lg ">
+     <Avatar className="h-20 w-20 border-2 border-red-800 border-dashed rounded-lg ">
         <AvatarImage src={user?.profileImageUrl} />
         <AvatarFallback>
             {/* if the image of avatar haven't load yet....show names */}

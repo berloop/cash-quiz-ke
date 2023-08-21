@@ -69,3 +69,33 @@ export const shuffleArray = <T>(array: T[]): T[] => {
   }
   return newArray;
 };
+
+
+export const playTimerSound = () => {
+
+  const audio = new Audio('/sound/timetick.mp3');
+  audio.preload = 'auto';
+  audio.play();
+
+
+};
+
+
+export const playClickSound= () => {
+
+  const audio = new Audio('/sound/clicker.wav');
+  audio.preload = 'auto';
+  audio.play();
+
+
+};
+
+
+export const playNextSound= () => {
+
+  const audio = new Audio('/sound/next.wav');
+  audio.preload = 'auto';
+  audio.play();
+
+
+};
