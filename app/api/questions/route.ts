@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server';
 
 
 
-
+export const revalidate = 1;
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
