@@ -3,7 +3,9 @@ import prismadb from '@/lib/prismadb';
 import { NextResponse } from 'next/server';
 
 
-
+//MUST ADD TO MARK THE PAGE DYNAMIC...
+export const revalidate = 1;
+export const dynamic = 'force-dynamic';
 
 
 export async function GET() {
