@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 import { useRouter } from "next/navigation";
 
@@ -108,7 +109,7 @@ const DashboardPage = () => {
                     >
                         <div className="max-w-sm rounded overflow-hidden">
                             <div className="flex justify-center">
-                                <img
+                                <Image
                                     src={tool.image} // Replace 'tool.imageUrl' with the URL of your image
                                     alt={tool.label} // You can set the alt attribute to a descriptive text about the image
                                     className="w-36 h-36 object-cover" // Adjust width and height as per your requirements

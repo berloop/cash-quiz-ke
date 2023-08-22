@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { Activity, ArrowRight, ArrowRightCircle, ArrowRightSquare, ChevronRightSquare, Code, Code2, FileImage, FileVideo2, ListMusic, MessageSquare, MessagesSquare, Music2, Settings2Icon, Sparkles } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 
 const tools = [
@@ -108,10 +109,12 @@ const DashboardPage = () => {
                     >
                         <div className="max-w-sm rounded overflow-hidden">
                             <div className="flex justify-center">
-                                <img
+                            <Image
                                     src={tool.image} // Replace 'tool.imageUrl' with the URL of your image
-                                    alt={tool.label} // You can set the alt attribute to a descriptive text about the image
-                                    className="w-36 h-36 object-cover" // Adjust width and height as per your requirements
+                                    alt={tool.label}
+                                    width={130}
+                                    height={130} // You can set the alt attribute to a descriptive text about the image
+                                    className=" object-cover" // Adjust width and height as per your requirements
                                 />
                             </div>
                             <div className="px-6 py-4">

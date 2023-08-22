@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils';
 
 const cardFeatures = [
     {
+        id:1,
         headerText: "Modern UI/UX Design",
         description: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.",
         icon: Sparkles,
@@ -15,6 +16,7 @@ const cardFeatures = [
 
     },
     {
+        id:2,
         headerText: "Leaderboard",
         description: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.",
         icon: MedalIcon,
@@ -25,6 +27,7 @@ const cardFeatures = [
     },
 
     {
+        id:3,
         headerText: "Daily Prizes",
         description: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo possimus adipisci distinctio alias voluptatum blanditiis laudantium.",
         icon: AwardIcon,
@@ -55,7 +58,7 @@ const IconCardGroup = () => {
                 <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 
                     {cardFeatures.map((tool) => (
-                        <a
+                        <a  key={tool.id}
                             className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-red-500/10 hover:shadow-red-500/10"
                             href={tool.href}
                         >

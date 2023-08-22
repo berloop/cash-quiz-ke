@@ -78,6 +78,9 @@ const RankingsPage: React.FC = () => {
         setRankings(rankingsData);
         setFilteredRankings(rankingsData);
         setSortedRankings(rankingsData.slice().sort((a: { score: number; }, b: { score: number; }) => b.score - a.score));
+      // 
+       
+        
       });
    }, []);
 

@@ -225,7 +225,7 @@ const CreatePage: React.FC = () => {
                                             </FormControl>
                                             <FormDescription className='text-zinc-600 text-xs'>
                                                 <div className='flex gap-x-1'>
-                                                    <Lightbulb className='flex text-xs' size={15} /> Note: The answer should 100% match it's choice in writing.
+                                                    <Lightbulb className='flex text-xs' size={15} /> Note: The answer should 100% match it&rsquo;s choice in writing.
                                                 </div>
 
                                             </FormDescription>

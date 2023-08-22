@@ -147,7 +147,7 @@ const StatsPage: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className=" mb-4 justify-center flex">
-                    <Image className='animate-pulse'
+                  <Image className='animate-pulse p-4'
                       alt="Empty"
                       src="/leader.png"
                       width={180}
@@ -175,7 +175,7 @@ const StatsPage: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className=" mb-4 justify-center flex">
-                    <Image className='animate-pulse'
+                  <Image className='animate-pulse p-4'
                       alt="Empty"
                       src="/calendar.png"
                       width={180}
@@ -197,7 +197,7 @@ const StatsPage: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className=" mb-4 justify-center flex">
-                    <Image className='animate-pulse'
+                  <Image className='animate-pulse p-4'
                       alt="Empty"
                       src="/user.png"
                       width={180}
@@ -222,7 +222,7 @@ const StatsPage: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className=" mb-4 justify-center flex">
-                    <Image className='animate-pulse'
+                    <Image className='animate-pulse p-4'
                       alt="Empty"
                       src="/glass.png"
                       width={180}
@@ -243,7 +243,7 @@ const StatsPage: React.FC = () => {
             <Card className='mt-5'>
               <CardHeader>
                 <CardTitle className='text-normal text-sm text-zinc-400'>
-                  You have Finished Today's Trivia!!
+                  You have Finished Today&rsquo;s Trivia!!
                 </CardTitle>
               </CardHeader>
               <CardFooter>

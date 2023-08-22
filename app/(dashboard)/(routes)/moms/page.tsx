@@ -263,7 +263,7 @@ const GertPage: React.FC = () => {
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
         </h2>
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
-          Play, Win, Repeat on Zari's Trivia!
+          Play, Win, Repeat on Mom&rsquo;s Trivia!
         </p>
         {/* <Button onClick={playNotification} variant={"admin"}>Test Audio</Button> */}
       </div>

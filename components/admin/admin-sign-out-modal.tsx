@@ -51,7 +51,7 @@ export const AdminSignOutModal = () => {
 <figure className="max-w-screen-md mx-auto text-center">
    
     <blockquote>
-    <p className="font-medium text-normal text-zinc-600 text-center">"I went to sleep dreaming of Malawi, and all the things made possible when your dreams are powered by your heart."</p>
+    <p className="font-medium text-normal text-zinc-600 text-center">&ldquo;I went to sleep dreaming of Malawi, and all the things made possible when your dreams are powered by your heart.&rdquo;</p>
     </blockquote>
     <figcaption className="flex items-center justify-center mt-2 space-x-3">
         

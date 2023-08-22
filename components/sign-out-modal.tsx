@@ -46,7 +46,7 @@ export const SignOutModal = () => {
     
   </Card>
   <h2 className="text-white text-2xl font-bold">Are you seriously like, logging out?</h2>
-  <p className="font-medium text-normal text-zinc-400 text-center">Oh, we'd hate to see you leaving but you can jump back with us any time and enjoy the fun.</p>
+  <p className="font-medium text-normal text-zinc-400 text-center">Oh, we&apos;d hate to see you leaving but you can jump back with us any time and enjoy the fun.</p>
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>

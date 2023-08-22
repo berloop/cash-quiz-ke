@@ -113,6 +113,7 @@ const LeaderboardPage: React.FC = () => {
       filterRankings();
     }, [filterValue]);
     
+    
 
    const fetchRankings = async () => {
       try {
@@ -183,7 +184,7 @@ const LeaderboardPage: React.FC = () => {
             />
                     
                      </div>
-                     <div className="border-zinc-400 rounded-sm p-4 shadow-lg bg-[#232222]">
+                     <div className="border-zinc-400 rounded-sm p-7 shadow-lg bg-[#121212]">
                         
                         <Table className='shadow-lg'>
                            <TableHeader>
@@ -215,7 +216,7 @@ const LeaderboardPage: React.FC = () => {
                            </TableHeader>
                         
                            <TableBody>
-                           {/* {sortedRankings.map((ranking, index) => ( */}
+                        
                            {filteredRankings.map((ranking, index) => (
                   <TableRow key={index} className='border-white/10'>
                     <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-400">
