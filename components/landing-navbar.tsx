@@ -25,7 +25,7 @@ export const LandingNavbar = () => {
         <nav className="p-4 bg-transparent flex items-center justify-between">
             <Link href="/" className="flex items-center">
                 <div className="relative h-8 w-8 mr-4">
-                <Image className="animate-pulse"
+                <Image
             alt="icon"
              fill
               src="/icon.png"
