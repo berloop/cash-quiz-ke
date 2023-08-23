@@ -7,7 +7,7 @@ import { useSelectedLayoutSegment } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 import { LandingMobileNav } from "./landing-mobile-nav"
-import { AlignJustify, HomeIcon, SidebarCloseIcon, Sparkles, XSquare } from "lucide-react"
+import { AlignJustify, HomeIcon, SidebarCloseIcon, Sparkles, Triangle, XSquare } from "lucide-react"
 import { Button } from "./ui/button"
 import Image from "next/image"
 import { Outfit } from "next/font/google"
@@ -31,15 +31,7 @@ export function LandingMainNav() {
         <nav className="hidden gap-6 md:flex">
 
         <Link href="/" className="flex items-center">
-                <div className="relative h-8 w-8 mr-4">
-                <Image
-            alt="icon"
-             width={120}
-             height={120}
-              src="/icon.png"
-               />
-
-                </div>
+                
                 <h1 className={cn("text-2xl font-bolder text-white", font.className)}>
                      Ndoto<span className="text-transparent font-bolder bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia.</span>
                 </h1>
