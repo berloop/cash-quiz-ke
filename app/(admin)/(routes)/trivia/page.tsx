@@ -245,13 +245,12 @@ const AllTriviaPage: React.FC = () => {
                       {trivia.question}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
-                  
-
+                     
                     <ul className="list-none text-balance pl-4 bg-[#201e1e] rounded-sm p-2 text-zinc-500 text-normal">
-    {trivia.options.map((option: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined, index: React.Key | null | undefined) => (
+    {trivia.options.map((option: any, index: number) => (
      
       <li key={index} className="flex items-center"> <CircleDashed size={10} className="mr-2 flex-shrink-0 mt-1" />
-      {option}
+      {option.text}
     </li>
     ))}
   </ul>
