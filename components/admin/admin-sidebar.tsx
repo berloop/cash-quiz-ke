@@ -5,7 +5,7 @@ import Link from "next/link";
 // import { Poppins } from "next/font/google";
 import { Nunito } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, Dices, FileImage, FileVideo2, HardDriveUpload, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, PlayCircleIcon, Settings, ShieldAlertIcon, ShieldCheck, Shirt, Sparkles, SparklesIcon, TrophyIcon, Tv2, User2Icon, Users2Icon, VenetianMask, VideoIcon, View, ViewIcon, ZapIcon } from "lucide-react";
+import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, Dices, FileImage, FileVideo2, HardDriveUpload, ImageIcon, ImagePlus, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, PlayCircleIcon, Settings, ShieldAlertIcon, ShieldCheck, Shirt, Sparkles, SparklesIcon, TrophyIcon, Tv2, User2Icon, Users2Icon, VenetianMask, VideoIcon, View, ViewIcon, ZapIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SignOutter } from "@/components/sign-outter";
 import { Badge } from "@/components/ui/badge";
@@ -59,6 +59,16 @@ const userdataRoutes = [
         href: "/trivia",
         color: "text-zinc-400",
     },
+    {
+        label: "Trivia Assets Drive",
+        icon: ImagePlus,
+        href: " https://console.cloudinary.com/console/c-109caedc0763a7aa9916963492b60d/media_library/folders/home",
+        color: "text-zinc-400",
+    },
+
+
+
+   
     
     
    

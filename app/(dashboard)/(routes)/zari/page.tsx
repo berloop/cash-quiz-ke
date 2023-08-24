@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { getTriviaQuestions, getZariQuestions } from '@/lib/trivia-questions';
+import { getMomQuestions, getTriviaQuestions, getZariQuestions } from '@/lib/trivia-questions';
 import {
   Card,
   CardContent,
@@ -23,7 +23,7 @@ import { UserAvatar } from '@/components/user-avatar';
 import { ScoreAvatar } from '@/components/score-avatar';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TableHeader, TableRow, TableHead, TableBody, TableCell, TableCaption } from '@/components/ui/table';
-import { Airplay, CircleDashed, Table, Timer } from 'lucide-react';
+import { Airplay, CircleDashed, FileImage, Option, Table, Timer } from 'lucide-react';
 import CountUp from 'react-countup';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { UserQuestionSpinner } from '@/components/questions-spinner';
@@ -31,9 +31,11 @@ import { ToastAction } from '@/components/ui/toast';
 import { playClickSound, playNextSound, playNotification, showErrorToast, showSuccessToast, shuffleArray } from '@/lib/functions';
 import { Progress } from '@/components/ui/progress';
 import { useWindowSize } from 'react-use';
+import Image from 'next/image';
 
 
 import Confetti from "react-confetti";
+import { Console } from 'console';
 
 
 
@@ -43,6 +45,12 @@ interface Result {
   correctAnswers: number;
   wrongAnswers: number;
 }
+
+interface Option {
+  text: string;
+  image: string;
+}
+
 
 const GertPage: React.FC = () => {
 
@@ -92,6 +100,7 @@ const GertPage: React.FC = () => {
       const shuffledQuestions = shuffleArray(questionsData);
       setQuestions(shuffledQuestions);
       setLoadingQuestions(false);
+      console.log(shuffledQuestions);
     } catch (error) {
       console.error('Error Fetching Questions', error);
       setLoadingQuestions(false);
@@ -118,23 +127,25 @@ const GertPage: React.FC = () => {
   }, [totalTimeRemaining]);
 
 
-  const onAnswerSelected = (option: string, idx: number) => {
+
+  const onAnswerSelected = (option: any, idx: number) => {
     setChecked(true);
     setSelectedAnswerIndex(idx);
     playClickSound();
 
     const correctAnswer = questions[activeQuestion]?.answer;
 
-    if (option.trim() === correctAnswer.trim()) {
-      setSelectedAnswer(option);
-      console.log('Option Selected:', option)
+
+    if (option.text.trim() === correctAnswer.trim()) {
+      setSelectedAnswer(option.text);
+      console.log('Option Selected:', option.text)
       //adding a bonus time if you get right answer..
       setTotalTimeRemaining(totalTimeRemaining + 2);
       console.log('Correct Answer:', correctAnswer)
       console.log('Status:', true)
     } else {
       setSelectedAnswer(false);
-      console.log('Option Selected:', option)
+      console.log('Option Selected:', option.text)
       console.log('Correct Answer:', correctAnswer)
       console.log('Status:', false)
     }
@@ -255,6 +266,8 @@ const GertPage: React.FC = () => {
 
 
 
+
+
   return (
     <div className="px-5 py-10 text-white select-none">
       <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName || "Friend:)"}.</h1>
@@ -276,41 +289,92 @@ const GertPage: React.FC = () => {
 
 
           {questions.length > 0 && !showResult && (
+
             <div className='select-none'>
-              <h2 className='text-zinc-500 font-bold'>Question {activeQuestion + 1} of {questions.length} </h2>
+              <h2 className='text-black text-xs font-bold my-2'><span className='bg-gradient-to-r from-red-500 to-red-800 p-1 px-2 rounded-full'>Qn {activeQuestion + 1} of {questions.length} </span></h2>
+              <h3 className='text-zinc-400 text-lg font-semibold mb-3'>{questions[activeQuestion].question}</h3>
+              <div className="grid grid-cols-2 gap-1.5 md:grid-cols-2 lg:grid-cols-4">
+
+                {questions[activeQuestion].options.map((option: any, idx: number) => (
+                  <Card
+                    key={idx}
+                    onClick={() => onAnswerSelected(option, idx)}
+                    className={
+                      selectedAnswerIndex === idx
+                        ? "flex flex-col items-center justify-center border-dashed bg-transparent border-2 text-green-600 border-green-600 cursor-pointer rounded-lg font-bold transition animate-pulse"
+                        : "flex flex-col items-center justify-center   border-dashed border-[#fffdfd38] bg-[#121212] text-zinc-300 cursor-pointer rounded-lg"
+                    }
+                  >
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                      <CardTitle className="text-sm font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
+                        {/* <p className={
+                          selectedAnswerIndex === idx
+                          ? "flex items-center text-xs text-green-400"
+                          : "flex items-center text-xs"
+                        }
+                          >
+                          Option {idx + 1}
+
+                        </p> */}
+                      </CardTitle>
+                     
 
 
-              <Card className="rounded-lg mt-5 border-red shadow-red-500/10">
-                <CardHeader>
-                  <CardTitle className="text-zinc-400">
-                    {/* <span className='text-zinc-500 gap-4 rounded-sm text-xs font-medium bg-neutral-700 hidden md:inline'> Qn {activeQuestion + 1} </span>  */}
-                    {questions[activeQuestion].question}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="w-full text-sm font-medium space-y-2  p-3 rounded-sm overflow-y-auto">
-                    {questions[activeQuestion].options.map((option: string, idx: number) => (
 
-                      <li key={idx}
-                        onClick={() => onAnswerSelected(option, idx)}
-                        className={selectedAnswerIndex === idx ? "flex items-center px-4 py-2 border-dashed bg-[#1a251c] border-2 text-green-600 border-green-600 cursor-pointer rounded-sm font-bold transition" : "flex items-center px-4 py-2 bg-[#282727] text-zinc-300 cursor-pointer rounded-sm animate-pulse"}>
-                        <CircleDashed size={10} className="mr-2 flex-shrink-0 mt-0" /> <p className="max-w-full text-base break-words">{option}</p>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  {checked ? (
-                    <Button onClick={nextQuestion} variant="admin" className='text-base text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>
-                      {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
-                    </Button>
-                  ) : (
-                    <Button disabled variant="admin" className='text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                      {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
+
+                    </CardHeader>
+                    <CardContent>
+                      <div className=" mb-4 justify-center flex">
+                        <Image
+                          alt="Home"
+                          src={option.image}
+                          width={200}
+                          height={200}
+                          className="w-full rounded-md object-cover animate-pulse"
+                        />
+                      </div>
+
+{/* 
+                      <div className="text-zinc-600 text-xs break-words overflow-hidden">
+                      <p className="font-medium">
+    {option.text.length > 20 ? `${option.text.substring(0, 20)}...` : option.text}
+  </p>
+                      </div> */}
+
+
+
+
+                    </CardContent>
+                  </Card>
+
+
+
+                ))}
+              </div>
+
+
+
+
+
+
+
+
+
+
+              <div className='flex  items-center justify-center md:justify-end lg:justify-end mx-0 md:mx-0 mt-3'>
+
+                {checked ? (
+
+                  <Button onClick={nextQuestion} variant="admin" className='text-base text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-bold'>
+                    {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
+                  </Button>
+                ) : (
+                  <Button disabled variant="admin" className='text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                    {activeQuestion === questions.length - 1 ? 'Finish Trivia' : 'Next Question'}
+                  </Button>
+                )}
+              </div>
+
               <div className='flex items-center'>
                 <Timer className='w-5 h-5 text-red-800' />
                 <p className='font-medium text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 m-2 text-sm'>Time left: {totalTimeRemaining} Seconds</p>

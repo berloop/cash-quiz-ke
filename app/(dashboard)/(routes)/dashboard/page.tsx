@@ -85,11 +85,18 @@ const DashboardPage = () => {
 
     return (
 
-        <div>
+        <div className="select-none" style={{
+            
+            // backgroundImage: `url("/hear.jpg")`,
+            // backgroundSize: 'cover',
+            // backgroundPosition: 'center',
+            // backgroundRepeat: 'no-repeat',
+
+        }}>
             <div className="mb-4 space-y-2">
-            <h1 className="text-sm font-bold text-white text-center">Hi, {user?.fullName || "Friend:)"}!</h1>
+                <h1 className="text-sm font-bold text-white text-center">Hi, {user?.fullName || "Friend:)"}!</h1>
                 <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-                Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
+                    Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
                 </h2>
                 <p className="text-white font-medium text-sm md:text-lg text-center">
                     Play, Win, Repeat!
@@ -104,12 +111,20 @@ const DashboardPage = () => {
                     <Card
                         onClick={() => router.push(tool.href)}
                         key={tool.href}
-                        className="p-4 flex-col items-center justify-center hover:shadow-lg  cursor-pointer rounded-xl border border-gray-800  shadow-xl transition hover:border-red-500/10 hover:shadow-red-500/10"
-                        style={{ minWidth: "200px", flex: "1 1 300px" }}
+                        className="p-4 flex-col rounded-lg items-center justify-center hover:shadow-lg  cursor-pointer border  border-transparent shadow-xl transition hover:border-red-500/10 hover:shadow-red-500/10"
+                        style={{
+                            minWidth: "200px", flex: "1 1 300px",
+                            backgroundImage: `url("/particle_02.jpg")`,
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            backgroundRepeat: 'no-repeat',
+
+                        }}
+
                     >
                         <div className="max-w-sm rounded overflow-hidden">
                             <div className="flex justify-center">
-                            <Image
+                                <Image
                                     src={tool.image} // Replace 'tool.imageUrl' with the URL of your image
                                     alt={tool.label}
                                     width={130}
