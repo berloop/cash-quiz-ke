@@ -41,7 +41,7 @@ export default function RootLayout({
     
     >
     <html lang="en" className='bg-[#1A1818]'>
-      {/* <CrispProvider /> */}
+      <CrispProvider />
       <body className={inter.className}>
       <ModalProvider />
       <ToasterProvider />
