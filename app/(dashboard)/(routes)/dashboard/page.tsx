@@ -51,7 +51,15 @@ const tools = [
         bgColor: "bg-[#202020]",
         description: "Already Binge-watched Mom's Day Off? Take our trivia from the show and stand a chance to win!",
     },
-
+    {
+        label: "Daily Prizes",
+        icon: Settings2Icon,
+        href: "/prizes",
+        image: "/prizes.png",
+        color: "text-white",
+        bgColor: "bg-[#202020]",
+        description: "Find out what you can win when you play our trivia on daily basis, but also on the long run if you stand a champion!",
+    },
     {
         label: "LeaderBoard",
         icon: Settings2Icon,
@@ -61,15 +69,7 @@ const tools = [
         bgColor: "bg-[#202020]",
         description: "View your position among others to see whether you are going to walk a Prize Winner!",
     },
-    {
-        label: "Preferences",
-        icon: Settings2Icon,
-        href: "/profile",
-        image: "/settings.png",
-        color: "text-white",
-        bgColor: "bg-[#202020]",
-        description: "Manage Your Account Setting and preferences.",
-    },
+    
 ]
 
 

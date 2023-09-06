@@ -5,7 +5,7 @@ import Link from "next/link";
 // import { Poppins } from "next/font/google";
 import { Nunito } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, FileImage, FileVideo2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, Settings, Shirt, Sparkles, TrophyIcon, Tv2, User2Icon, VenetianMask, VideoIcon, View, ZapIcon } from "lucide-react";
+import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, FileImage, FileVideo2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, Settings, Shirt, Sparkles, Trophy, TrophyIcon, Tv2, User2Icon, VenetianMask, VideoIcon, View, ZapIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SignOutter } from "@/components/sign-outter";
 
@@ -33,6 +33,7 @@ const routes = [
         href: "/leaderboard",
         color: "text-zinc-400",
     },
+    
     
     
 ];
@@ -112,11 +113,11 @@ export const Sidebar = () => {
     const pathname = usePathname();
 
     return (
-        <div className="space-y-4 py-4 flex flex-col h-full  text-zinc-400 overflow-y-auto">
+        <div className="space-y-4 py-4 flex flex-col h-full  text-zinc-400 overflow-y-auto ">
             <div className="px-3 py-2 flex-1">
                 
                 <Link href="/dashboard" className="
-             flex items-center pl-3 mb-10">
+             flex items-center pl-3 mb-5">
                     
                     <div className={cn("text-2xl mt-3 text-white font-bold")}>Ndoto<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia&trade;</span></div>
                   
