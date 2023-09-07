@@ -126,6 +126,16 @@ const LeaderboardPage: React.FC = () => {
       }
     };
 
+    const obscureEmail = (email: string): string => {
+      const parts = email.split('@');
+      if (parts.length === 2) {
+        const [username, domain] = parts;
+        const obscuredUsername = `${username.charAt(0)}${'▪'.repeat(username.length - 1)}`;
+        return `${obscuredUsername}@${domain}`;
+      }
+      return email; // Return the original email if it doesn't match the expected format
+    };
+
    const router = useRouter();
 
    const randomNum = Math.floor(Math.random() * 2900) + 1;
@@ -199,7 +209,7 @@ const LeaderboardPage: React.FC = () => {
                                     Email Address
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Inception Date
+                                    First Played
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Last Played
@@ -226,7 +236,8 @@ const LeaderboardPage: React.FC = () => {
                       {ranking.userFirstName} {ranking.userLastName} {/* Display full name */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
-                      {ranking.userEmail} {/* Display email address */}
+                     {/* Obscure email so people wont spam others.. */}
+                      {obscureEmail(ranking.userEmail)}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
                       {formatDate(ranking.firstPlayedDate)} {/* Format and display last played date */}
