@@ -97,7 +97,7 @@ const AdminOverviewPage: React.FC = () => {
 
    return (
       <div className='text-white mt-5'>
-    <h1 className="text-xl text-zinc-400 font-bold mb-2 ml-8">Hi, {user?.fullName || "Admin"},</h1>
+    <h1 className="text-xl text-zinc-400 font-bold mb-2 ml-8">Hi, {user?.fullName || "Admin"}!</h1>
          <div className="mb-4 space-y-2 ml-8">
             <h2 className="text-2xl md:text-4xl text-white font-bold">
                <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia:</span> Admin Console
@@ -107,7 +107,7 @@ const AdminOverviewPage: React.FC = () => {
                Here you can view user analytics, create trivia and more.
             </p>
            
-         
+          
       
     
             <div className="flex-1 text-xs text-zinc-400">

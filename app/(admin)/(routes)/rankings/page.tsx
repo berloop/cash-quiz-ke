@@ -299,16 +299,19 @@ const handlePayouts = async () => {
                                     Position
                                  </TableHead>
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Full Name
+                                    Username
                                  </TableHead>
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Email Address
                                  </TableHead>
-                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Inception Date
+                                 <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Phone Number
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Last Played
+                                    First Play
+                                 </TableHead>
+                                 <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Last Play
                                  </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Status
@@ -329,10 +332,13 @@ const handlePayouts = async () => {
                       #{index + 1}. {/* Display rank number */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-400">
-                      {ranking.userFirstName} {ranking.userLastName} {/* Display full name */}
+                      {ranking.userName}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
                       {ranking.userEmail} {/* Display email address */}
+                    </TableCell>
+                    <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
+                      {ranking.userphoneNumber} {/* Display email address */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
                       {formatDate(ranking.firstPlayedDate)} {/* Format and display last played date */}

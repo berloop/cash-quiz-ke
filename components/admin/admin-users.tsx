@@ -107,7 +107,7 @@ const RankingsTable: React.FC = () => {
              //       
              <div className="w-full">
               
-                <div className="flex items-center flex justify-center items-center py-1">
+                <div className="flex items-center justify-center  py-1">
 {/*                  
                 <Input
          placeholder="Filter emails..."
@@ -126,10 +126,17 @@ const RankingsTable: React.FC = () => {
                             <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                Name
                             </TableHead>
+                          
                            
                         
                             <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                               Total Score
+                        Phone Number
+                            </TableHead>
+                            <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                   Last Played
+                            </TableHead>
+                            <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                               Points
                             </TableHead>
 
                          </TableRow>
@@ -142,11 +149,15 @@ const RankingsTable: React.FC = () => {
              <TableRow key={index} className='border-white/10'>
                
                <TableCell colSpan={1} className="h-1 w-1 border-r border-white/10 text-zinc-400">
-                 {ranking.userFirstName} {ranking.userLastName}
+                 {ranking.userName}
                </TableCell>
-             
-               
-             
+               <TableCell colSpan={1} className="h-1 w-1 border-r text-center border-white/10 text-zinc-400">
+               {ranking.userphoneNumber}
+               </TableCell> 
+               <TableCell colSpan={1} className="h-1 w-1 border-r border-white/10 text-zinc-400">
+                 {formatDate(ranking.lastPlayedDate)}  
+               </TableCell>
+                 
                <TableCell colSpan={1} className="h-1 w-1 text-center text-zinc-400 font-bold">
                  {ranking.score} Pts {/* Display total score */}
                </TableCell>
@@ -158,7 +169,7 @@ const RankingsTable: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-start space-x-2 py-4">
                    <div className="flex-1 text-xs text-zinc-400">
-                   <Link href="/create">
+                   <Link href="/rankings">
           <Button variant="admin" className="md:text-lg p-4 md:p-6 rounded-lg font-bold  text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">
           <ArrowUpLeftSquare className="mr-2 h-4 w-4 text-red-800" /> 
           View More Details 
