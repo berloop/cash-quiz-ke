@@ -136,6 +136,23 @@ const LeaderboardPage: React.FC = () => {
       return email; // Return the original email if it doesn't match the expected format
     };
 
+    const obscurePhoneNumber = (phoneNumber: string): string => {
+      // Check if the phone number is valid
+      if (/^\+\d{10,15}$/.test(phoneNumber)) {
+        const countryCode = phoneNumber.slice(0, 4);
+        const obscuredDigits = phoneNumber.slice(4, -4).replace(/\d/g, '▪'); // Use • (bullet) as the replacement
+        const lastFourDigits = phoneNumber.slice(-4);
+        return `${countryCode}${obscuredDigits}${lastFourDigits}`;
+      }
+      return phoneNumber; // Return the original phone number if it doesn't match the expected format
+    };
+    
+    // Example usage:
+    const phoneNumber = "+255788165984";
+    const obscuredNumber = obscurePhoneNumber(phoneNumber);
+    console.log(obscuredNumber); // Output: +255•••••••••5984
+    
+
    const router = useRouter();
 
    const randomNum = Math.floor(Math.random() * 2900) + 1;
@@ -208,6 +225,9 @@ const LeaderboardPage: React.FC = () => {
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Email Address
                                  </TableHead>
+                                 <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
+                                    Phone Number
+                                 </TableHead>
                                  <TableHead className='text-center border-l border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     First Played
                                  </TableHead>
@@ -238,6 +258,10 @@ const LeaderboardPage: React.FC = () => {
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
                      {/* Obscure email so people wont spam others.. */}
                       {obscureEmail(ranking.userEmail)}
+                    </TableCell>
+                    <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
+                     {/* Obscure email so people wont spam others.. */}
+                      {obscurePhoneNumber(ranking.userphoneNumber)}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-center text-zinc-400 border-r border-white/10">
                       {formatDate(ranking.firstPlayedDate)} {/* Format and display last played date */}
