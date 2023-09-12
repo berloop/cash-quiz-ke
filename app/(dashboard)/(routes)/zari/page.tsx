@@ -183,17 +183,20 @@ const GertPage: React.FC = () => {
       const bonus = 5;
 
       // Prepare the payload for sending the score, also adding bonus of 5..
-      const scorePayload = {
+       // Prepare the payload for sending the score, also adding bonus of 5..
+       const scorePayload = {
         score: result.score + bonus,
         showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
         timestamp: new Date().toISOString(),
-        userName: user?.fullName || "TriviaBot",
-        userFirstName: user?.firstName || "TriviaBot",
+        userName: user?.username || "TriviaPlayer",
+        userFirstName: user?.firstName || "TriviaPlayer",
+        userPhoneNumber:user?.primaryPhoneNumber?.phoneNumber,
         userEmail: user?.primaryEmailAddress?.emailAddress || "Anonymous User",
-        userLastName: user?.lastName || "Doe"
+        userLastName: user?.lastName || "TriviaPlayer"
 
 
       };
+
 
       try {
         // Call sendScore with the payload
@@ -228,6 +231,7 @@ const GertPage: React.FC = () => {
     userName: string;
     userFirstName: string;
     userEmail: string;
+    userPhoneNumber:string;
     userLastName: string;
   }
 
@@ -270,7 +274,7 @@ const GertPage: React.FC = () => {
 
   return (
     <div className="px-5 py-10 text-white select-none">
-      <h1 className="text-3xl font-bold mb-5 text-center">Hi, {user?.fullName || "Friend:)"}.</h1>
+      <h1 className="text-3xl font-bold mb-5 text-center">Hi! {user?.username || "Friend"},</h1>
       <div className="mb-4 space-y-2 select-none">
         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
           Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>

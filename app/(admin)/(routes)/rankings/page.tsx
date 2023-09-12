@@ -35,6 +35,11 @@ import { UserIcon } from 'lucide-react';
 import { AdminSpinner } from '@/components/admin/admin-loader';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { EmptyImposter } from '@/components/admin/admin-imposter';
+import { getToken, soapPin, soapUsername } from '@/lib/soapintegration';
+import axios from 'axios';
+import { makeProductRequest } from '@/lib/payout-request';
+import { generateUniqueReference } from '@/lib/unique-reference';
+import { Console } from 'console';
 
 
 interface Result {
@@ -130,6 +135,75 @@ const RankingsPage: React.FC = () => {
       }
     };
 
+    const calculateWinners = (rankings: any[], topN: number): any[] => {
+      // Sort the rankings in descending order based on scores
+      const sortedRankings = rankings.sort((a, b) => b.score - a.score);
+    
+      // Select the top N winners
+      const winners = sortedRankings.slice(0, topN);
+    
+      return winners;
+    };
+
+
+
+const handlePayouts = async () => {
+  try {
+    // Calculate and select the top 10 winners based on your logic
+    const winners = calculateWinners(rankings, 3); // Replace with your logic
+
+    // Sort the winners from highest to lowest score
+    const sortedWinners = winners.sort((a, b) => b.score - a.score);
+
+   // Define the payout amounts for the top winners
+    const payoutAmounts = [60.0, 55.0, 50.0];
+
+     // Get the SOAP token
+     const token = await getToken(soapUsername, soapPin);
+
+     if (!token) {
+       // Handle the case where token retrieval failed
+       console.error('Failed to retrieve the SOAP token.');
+       return;
+     }
+
+
+
+    // Trigger payouts for the top 10 winners
+   //  for (const winner of winners) {
+
+   //    const payoutResponse = await makeProductRequest(
+   //      winner.authToken,
+   //      "AIRTIME",
+   //      generateUniqueReference(),
+   //      '27720124284',
+   //      winner.denomination
+   //    );
+
+   for (let i = 0; i < Math.min(3, sortedWinners.length); i++) {
+      const winner = sortedWinners[i];
+      const payoutAmount = payoutAmounts[i]; // Get the payout amount from the array
+      const payoutResponse = await makeProductRequest(
+        winner.authToken,
+        "AIRTIME",
+        generateUniqueReference(),
+        '27720124284',
+        payoutAmount
+      );
+
+
+      // Handle the payout response (e.g., display a message)
+      console.log(winner.auth);
+      console.log('Prize to be paid', payoutAmount)
+      console.log('Payout Response for Position', i + 1, ':', payoutResponse);
+    }
+  } catch (error) {
+    console.error('Error triggering payouts:', error);
+  }
+};
+
+
+
    const router = useRouter();
 
    const randomNum = Math.floor(Math.random() * 2900) + 1;
@@ -172,7 +246,13 @@ const RankingsPage: React.FC = () => {
             <p className="text-white font-normal text-sm md:text-lg text-center">
                Find ranking among trivia players.
             </p>
+           
+           
          </div>
+         <div className='flex justify-center'>
+            <Button className="mr-3" onClick={handlePayouts} variant={"admin"}>Trigger Payouts</Button>
+            <Button onClick={generateUniqueReference} variant={"admin"}>Create Reference</Button>
+            </div>
 
          {loading ? (
             // Show the spinner while loading

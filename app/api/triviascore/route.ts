@@ -60,6 +60,7 @@ export async function POST(
                   score: payload.score,
                   showName: payload.showName,
                   firstPlayedDate: payload.timestamp,
+                  userphoneNumber:payload.userPhoneNumber,
                   userEmail: payload.userEmail,
                   userName: payload.userName,
                   userFirstName: payload.userFirstName,

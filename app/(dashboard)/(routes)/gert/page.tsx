@@ -187,10 +187,11 @@ const GertPage: React.FC = () => {
         score: result.score + bonus,
         showName: 'Gert', // Replace 'Gert' with the actual showName you want to save
         timestamp: new Date().toISOString(),
-        userName: user?.fullName || "TriviaBot",
-        userFirstName: user?.firstName || "TriviaBot",
+        userName: user?.username || "TriviaPlayer",
+        userFirstName: user?.firstName || "TriviaPlayer",
+        userPhoneNumber:user?.primaryPhoneNumber?.phoneNumber,
         userEmail: user?.primaryEmailAddress?.emailAddress || "Anonymous User",
-        userLastName: user?.lastName || "Doe"
+        userLastName: user?.lastName || "TriviaPlayer"
 
 
       };
@@ -227,6 +228,7 @@ const GertPage: React.FC = () => {
     timestamp: string;
     userName: string;
     userFirstName: string;
+    userPhoneNumber:string;
     userEmail: string;
     userLastName: string;
   }

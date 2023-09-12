@@ -63,6 +63,7 @@
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.1.6",
     "typewriter-effect": "^2.20.1",
+    "xml2js": "^0.6.2",
     "zod": "^3.21.4",
     "zustand": "^4.3.9"
   },
@@ -70,6 +71,7 @@
     "@types/formidable": "^3.4.1",
     "@types/howler": "^2.2.7",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "@types/xml2js": "^0.4.12",
     "prisma": "^5.0.0"
   }
 }

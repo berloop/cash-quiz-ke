@@ -148,7 +148,7 @@ const LeaderboardPage: React.FC = () => {
 
    return (
       <div className="px-5 py-10 text-white">
-         <h1 className="text-2xl font-bold mb-2 text-center">Hi, {user?.fullName || "Friend:)"}!</h1>
+      <h1 className="text-3xl font-bold mb-5 text-center">Hi! {user?.username || "Friend"},</h1>
          <div className="mb-4 space-y-2">
             <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
                Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
@@ -203,7 +203,7 @@ const LeaderboardPage: React.FC = () => {
                                     Position
                                  </TableHead>
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
-                                    Full Name
+                                    Username
                                  </TableHead>
                                  <TableHead className='text-left border-r border-white/10 font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800'>
                                     Email Address
@@ -233,7 +233,7 @@ const LeaderboardPage: React.FC = () => {
                       #{index + 1}. {/* Display rank number */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 border-r border-white/10 text-zinc-400">
-                      {ranking.userFirstName} {ranking.userLastName} {/* Display full name */}
+                      {ranking.userName} {/* Display full name */}
                     </TableCell>
                     <TableCell colSpan={1} className="h-2 text-zinc-400 border-r border-white/10">
                      {/* Obscure email so people wont spam others.. */}

@@ -94,7 +94,7 @@ const DashboardPage = () => {
 
         }}>
             <div className="mb-4 space-y-2">
-                <h1 className="text-sm font-bold text-white text-center">Hi, {user?.fullName || "Friend:)"}!</h1>
+                <h1 className="text-sm font-bold text-white text-center">Hi, {user?.primaryPhoneNumber?.phoneNumber || "Friend:)"}!</h1>
                 <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
                     Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
                 </h2>

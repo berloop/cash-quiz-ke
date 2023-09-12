@@ -27,23 +27,23 @@ datasource db {
 // }
 
 model TriviaQuestion {
-  id          String    @id  @default(cuid())
-  question    String
-  options     Json    // Store the options as JSON
-  answer      String
-  showName    String  // Added the showName field
+  id       String @id @default(cuid())
+  question String
+  options  Json // Store the options as JSON
+  answer   String
+  showName String // Added the showName field
 }
 
 model TriviaScore {
-  id         String    @id @default(cuid())
-  showName   String
-  score      Int
-  firstPlayedDate  DateTime  @default(now())
-  userId         String    @unique 
-  userEmail      String    
-  userName       String    
-  userFirstName  String?   // Nullable field
-  userLastName   String?   // Nullable field
-  lastPlayedDate DateTime? // Nullable field
-
+  id              String    @id @default(cuid())
+  showName        String
+  score           Int
+  firstPlayedDate DateTime  @default(now())
+  userId          String    @unique
+  userphoneNumber String
+  userEmail       String
+  userName        String
+  userFirstName   String? // Nullable field
+  userLastName    String? // Nullable field
+  lastPlayedDate  DateTime? // Nullable field
 }
