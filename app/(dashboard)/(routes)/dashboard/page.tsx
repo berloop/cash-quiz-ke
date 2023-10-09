@@ -11,6 +11,7 @@ import Image from "next/image";
 
 
 const tools = [
+   
     {
 
         label: "Gert Show Trivia",
@@ -43,14 +44,15 @@ const tools = [
         description: "Had Fun Partying with Zari? Take our Trivia from the show and stand a chance to win!",
     },
     {
-        label: "Mom's Day Off",
+        label: "World-Trivia Playground™",
         icon: FileImage,
-        image: "/Mom.jpg",
-        href: "/mom",
+        image: "/worlds.png",
+        href: "/trivia",
         color: "text-white",
         bgColor: "bg-[#202020]",
-        description: "Already Binge-watched Mom's Day Off? Take our trivia from the show and stand a chance to win!",
+        description: "Test your general knowledge on over massive trivia questions and stand a chance to win cash prizes!",
     },
+    
     {
         label: "Daily Prizes",
         icon: Settings2Icon,

@@ -35,11 +35,11 @@ import { UserIcon } from 'lucide-react';
 import { AdminSpinner } from '@/components/admin/admin-loader';
 import { AdminRankingSpinner } from '@/components/admin/admin-rankings-spinner';
 import { EmptyImposter } from '@/components/admin/admin-imposter';
-import { getToken, soapPin, soapUsername } from '@/lib/soapintegration';
 import axios from 'axios';
 import { makeProductRequest } from '@/lib/payout-request';
 import { generateUniqueReference } from '@/lib/unique-reference';
 import { Console } from 'console';
+
 
 
 interface Result {
@@ -145,7 +145,25 @@ const RankingsPage: React.FC = () => {
       return winners;
     };
 
-
+    async function getToken() {
+      try {
+        const response = await axios.post('/api/payout'); // Use GET request
+        
+        // Assuming the response contains a JSON object with the token
+        const token = response.data.token;
+    
+        // Now you can use the 'token' in your application as needed
+        console.log('Token:', token);
+    
+        // Return the token or use it for further processing
+        return token;
+      } catch (error) {
+        console.error('Error getting token:', error);
+        // Handle errors as needed
+        return null;
+      }
+    }
+    
 
 const handlePayouts = async () => {
   try {
@@ -159,26 +177,13 @@ const handlePayouts = async () => {
     const payoutAmounts = [60.0, 55.0, 50.0];
 
      // Get the SOAP token
-     const token = await getToken(soapUsername, soapPin);
+     const token = await getToken();
 
      if (!token) {
        // Handle the case where token retrieval failed
        console.error('Failed to retrieve the SOAP token.');
        return;
      }
-
-
-
-    // Trigger payouts for the top 10 winners
-   //  for (const winner of winners) {
-
-   //    const payoutResponse = await makeProductRequest(
-   //      winner.authToken,
-   //      "AIRTIME",
-   //      generateUniqueReference(),
-   //      '27720124284',
-   //      winner.denomination
-   //    );
 
    for (let i = 0; i < Math.min(3, sortedWinners.length); i++) {
       const winner = sortedWinners[i];

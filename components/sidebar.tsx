@@ -5,7 +5,7 @@ import Link from "next/link";
 // import { Poppins } from "next/font/google";
 import { Nunito } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, FileImage, FileVideo2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, Settings, Shirt, Sparkles, Trophy, TrophyIcon, Tv2, User2Icon, VenetianMask, VideoIcon, View, ZapIcon } from "lucide-react";
+import { Activity, BarChart2, Camera, ChevronRightSquare, Church, Code, FileImage, FileVideo2, Globe2, ImageIcon, LayoutDashboard, Medal, MessageSquare, MessagesSquare, Music4, PartyPopper, Settings, Shirt, Sparkles, Trophy, TrophyIcon, Tv2, User2Icon, VenetianMask, VideoIcon, View, ZapIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SignOutter } from "@/components/sign-outter";
 
@@ -62,7 +62,12 @@ const userdataRoutes = [
 ];
 
 const triviaRoutes = [
-   
+    {
+        label: "World-Trivia Playground",
+        icon: Globe2,
+        href: "/trivia",
+        color: "text-zinc-400",
+    }, 
     
     {
         label: "Gert:Fashion on Lock",
@@ -70,12 +75,13 @@ const triviaRoutes = [
         href: "/gert",
         color: "text-zinc-400",
     },
-    {
-        label: "Mom's Day Off",
-        icon: VenetianMask,
-        href: "/moms",
-        color: "text-zinc-400",
-    }, {
+    // {
+    //     label: "Mom's Day Off",
+    //     icon: VenetianMask,
+    //     href: "/moms",
+    //     color: "text-zinc-400",
+    // },
+     {
         label: "Faith First: With Pushie",
         icon: Church,
         href: "/faith",

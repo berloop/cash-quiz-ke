@@ -56,7 +56,7 @@ const userdataRoutes = [
     {
         label: "Trivia Uploads",
         icon: HardDriveUpload,
-        href: "/trivia",
+        href: "/uploads",
         color: "text-zinc-400",
     },
     {
