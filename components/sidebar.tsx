@@ -33,6 +33,7 @@ const routes = [
         href: "/leaderboard",
         color: "text-zinc-400",
     },
+
     
     
     
@@ -68,6 +69,12 @@ const triviaRoutes = [
         href: "/trivia",
         color: "text-zinc-400",
     }, 
+     {
+        label: "BibleTrivia",
+        icon: Church,
+        href: "/bible",
+        color: "text-zinc-400",
+    },
     
     {
         label: "Gert:Fashion on Lock",
