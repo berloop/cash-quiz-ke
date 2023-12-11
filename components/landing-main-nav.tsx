@@ -36,7 +36,12 @@ export function LandingMainNav() {
                      Cash<span className="text-transparent font-bolder bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Quiz.</span>
                 </h1>
             </Link>
-         
+            <Link
+             
+             href="/bible"
+             className= "flex items-center text-lg text-zinc-400 font-medium transition-colors hover:text-red-800 sm:text-sm">
+            BibleQuiz
+           </Link>
             <Link
              
               href="#features"

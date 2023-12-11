@@ -168,7 +168,7 @@ const LeaderboardPage: React.FC = () => {
       <h1 className="text-2xl font-bold mb-2 text-center">Hi! {user?.username || "Friend"},</h1>
          <div className="mb-4 space-y-2">
             <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-               Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
+               Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">CashQuiz!</span>
             </h2>
             <p className="text-white font-normal text-sm md:text-lg text-center">
                Find your ranking among players.

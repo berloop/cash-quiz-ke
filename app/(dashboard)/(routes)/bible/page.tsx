@@ -273,8 +273,8 @@ const GertPage: React.FC = () => {
     <div className="px-5 py-10 text-white select-none">
        <h1 className="text-2xl font-bold mb-2 text-center">Hi! {user?.username || "Friend"},</h1>
       <div className="mb-4 space-y-2 select-none">
-        <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-          BibleTrivia<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800"> Playground&trade;</span>
+        <h2 className="text-2xl md:text-4xl text-white font-bold text-center"> Welcome to
+          Bible<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Quiz!</span>
         </h2>
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
           Test your Knowledge on Bible Trivia Questions!

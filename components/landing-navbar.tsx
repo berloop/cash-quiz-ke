@@ -33,7 +33,7 @@ export const LandingNavbar = () => {
 
                 </div>
                 <h1 className={cn("text-2xl font-bolder text-white", font.className)}>
-                     Ndoto<span className="text-transparent font-bolder bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia.</span>
+                     Cash<span className="text-transparent font-bolder bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Quiz.</span>
                 </h1>
             </Link>
             <div className="flex items-center gap-x-2">

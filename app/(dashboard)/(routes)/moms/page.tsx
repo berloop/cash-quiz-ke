@@ -275,7 +275,7 @@ const GertPage: React.FC = () => {
        <h1 className="text-3xl font-bold mb-5 text-center">Hi! {user?.username || "Friend"},</h1>
       <div className="mb-4 space-y-2 select-none">
         <h2 className="text-2xl md:text-4xl text-white font-bold text-center">
-          Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">NdotoTrivia&trade;</span>
+          Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">CashQuiz!</span>
         </h2>
         <p className="text-zinc-500 font-medium text-sm md:text-lg text-center">
           Play, Win, Repeat on Mom&rsquo;s Trivia!

@@ -70,7 +70,7 @@ const triviaRoutes = [
         color: "text-zinc-400",
     }, 
      {
-        label: "BibleTrivia",
+        label: "BibleQuiz (New)",
         icon: Church,
         href: "/bible",
         color: "text-zinc-400",
@@ -132,7 +132,7 @@ export const Sidebar = () => {
                 <Link href="/dashboard" className="
              flex items-center pl-3 mb-5">
                     
-                    <div className={cn("text-2xl mt-3 text-white font-bold")}>Ndoto<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800">Trivia&trade;</span></div>
+                    <div className={cn("text-3xl mt-3 text-white font-bold")}>Cash<span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-800 font-extrabold">Quiz&trade;</span></div>
                   
                 </Link>
                 <hr className="border-white/10 px-3 mb-2 flex-1"></hr>
