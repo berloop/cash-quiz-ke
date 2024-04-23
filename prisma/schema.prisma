@@ -1,12 +1,12 @@
-generator client {
-  provider = "prisma-client-js"
-}
+// generator client {
+//   provider = "prisma-client-js"
+// }
 
-datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
-}
+// datasource db {
+//   provider     = "mysql"
+//   url          = env("DATABASE_URL")
+//   relationMode = "prisma"
+// }
 
 // //creating a model for user API Limit...
 // model UserApiLimit {
@@ -26,24 +26,55 @@ datasource db {
 //   stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 // }
 
+// model TriviaQuestion {
+//   id       String @id @default(cuid())
+//   question String
+//   options  Json // Store the options as JSON
+//   answer   String
+//   showName String // Added the showName field
+// }
+
+// model TriviaScore {
+//   id              String    @id @default(cuid())
+//   showName        String
+//   score           Int
+//   firstPlayedDate DateTime  @default(now())
+//   userId          String    @unique
+//   userphoneNumber String
+//   userEmail       String
+//   userName        String
+//   userFirstName   String? // Nullable field
+//   userLastName    String? // Nullable field
+//   lastPlayedDate  DateTime? // Nullable field
+// }
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model TriviaQuestion {
-  id       String @id @default(cuid())
+  id       String   @id @default(cuid())
   question String
-  options  Json // Store the options as JSON
+  options  Json    // Use Jsonb for JSON data in PostgreSQL
   answer   String
-  showName String // Added the showName field
+  showName String   // Added the showName field
 }
 
 model TriviaScore {
-  id              String    @id @default(cuid())
-  showName        String
-  score           Int
-  firstPlayedDate DateTime  @default(now())
-  userId          String    @unique
-  userphoneNumber String
-  userEmail       String
-  userName        String
-  userFirstName   String? // Nullable field
-  userLastName    String? // Nullable field
-  lastPlayedDate  DateTime? // Nullable field
+  id               String    @id @default(cuid())
+  showName         String
+  score            Int
+  firstPlayedDate  DateTime  @default(now())
+  userId           String    @unique
+  userphoneNumber  String
+  userEmail        String
+  userName         String
+  userFirstName    String?   // Nullable field
+  userLastName     String?   // Nullable field
+  lastPlayedDate   DateTime? // Nullable field
 }
