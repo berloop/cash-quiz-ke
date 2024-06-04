@@ -14,7 +14,7 @@ import { AdminModalProvider } from '@/components/admin/admin-modal-provider'
 const inter = Outfit({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'CashQuiz | Next-Gen Trivia Experience',
+  title: 'CashOut Trivia | Next-Gen Trivia Experience',
   description: 'Next-Gen Trivia Platform',
 }
 
