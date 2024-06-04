@@ -24,7 +24,7 @@ export const LandingHero = () => {
     >
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <h1 className="font-heading text-3xl text-white sm:text-6xl md:text-7xl lg:text-7xl font-extrabold">
-          Introducing Cash<span className="text-transparent tracking-normal bg-clip-text bg-gradient-to-l from-red-500 to-red-800">Quiz.</span>
+          Introducing Cash<span className="text-transparent tracking-normal bg-clip-text bg-gradient-to-l from-red-500 to-red-800">Out Trivia</span>
           </h1>
           <p className="max-w-[42rem] leading-normal text-white sm:text-xl sm:leading-8 font-medium">
             A next-gen trivia platform you&rsquo;ll ever need where you play, win, repeat and stand a chance to win amazing daily prizes!
